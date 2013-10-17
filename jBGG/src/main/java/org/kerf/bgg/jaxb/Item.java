@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.log4j.Logger;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
+import org.kerf.bgg.type.ThingType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item {
@@ -25,7 +26,7 @@ public class Item {
 
    // FIXME - The BGG schema uses both "type" and "objecttype" in different places.
    @XmlAttribute(name = "type")
-   String type;
+   ThingType type;
 
    @XmlAttribute(name = "objecttype")
    String objectType;
@@ -73,8 +74,8 @@ public class Item {
    @XmlPath("thumbnail/@value")
    String thumbnailAttr;
 
-   @XmlElement
-   List<Link> link;
+   @XmlElement(name="link")
+   List<Link> links;
 
    @XmlElement(name = "statistics")
    Statistics stats;
@@ -135,11 +136,11 @@ public class Item {
       this.id = id;
    }
 
-   public String getType() {
+   public ThingType getType() {
       return type;
    }
 
-   public void setType(String type) {
+   public void setType(ThingType type) {
       this.type = type;
    }
 
@@ -220,12 +221,12 @@ public class Item {
       this.thumbnailAttr = thumbnailAttr;
    }
 
-   public List<Link> getLink() {
-      return link;
+   public List<Link> getLinks() {
+      return links;
    }
 
-   public void setLink(List<Link> link) {
-      this.link = link;
+   public void setLinks(List<Link> link) {
+      this.links = link;
    }
 
    public Statistics getStats() {

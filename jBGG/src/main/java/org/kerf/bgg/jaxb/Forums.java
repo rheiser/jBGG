@@ -9,11 +9,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.kerf.bgg.type.Type;
+
 @XmlRootElement(name="forums")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Forums {
    @XmlAttribute
-   String type;
+   Type type;
    
    @XmlAttribute
    String id;
@@ -24,11 +26,11 @@ public class Forums {
    @XmlElement(name="forum")
    List<Forum> forums;
 
-   public String getType() {
+   public Type getType() {
       return type;
    }
 
-   public void setType(String type) {
+   public void setType(Type type) {
       this.type = type;
    }
 

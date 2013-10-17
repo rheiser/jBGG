@@ -4,10 +4,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import org.kerf.bgg.type.LinkType;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Link {
    @XmlAttribute
-   String type;
+   LinkType type;
    
    @XmlAttribute
    String id;
@@ -18,11 +20,11 @@ public class Link {
    @XmlAttribute
    Boolean inbound;
 
-   public String getType() {
+   public LinkType getType() {
       return type;
    }
 
-   public void setType(String type) {
+   public void setType(LinkType type) {
       this.type = type;
    }
 

@@ -1,6 +1,7 @@
 package org.kerf.bgg;
 
 import java.net.MalformedURLException;
+import java.util.HashSet;
 import java.util.List;
 
 import org.kerf.bgg.command.CollectionCommand;
@@ -25,6 +26,9 @@ import org.kerf.bgg.jaxb.Items;
 import org.kerf.bgg.jaxb.Link;
 import org.kerf.bgg.jaxb.Name;
 import org.kerf.bgg.jaxb.Plays;
+import org.kerf.bgg.jaxb.Rank;
+import org.kerf.bgg.jaxb.Rating;
+import org.kerf.bgg.jaxb.Statistics;
 import org.kerf.bgg.jaxb.User;
 import org.kerf.bgg.type.NameType;
 import org.kerf.bgg.type.ThingType;
@@ -33,10 +37,9 @@ import org.kerf.bgg.type.Type;
 public class Main {
 
    static public void main(String[] args) throws Exception {
-      // doThing();
+      doThing();
       //         doSearch();
       //         doCollection();
-      //         doThread();
       //         doFamily();
       //         doForumList();
       //         doForum();
@@ -44,7 +47,7 @@ public class Main {
       //         doUsers();
       //         doGuilds();
       //         doPlays();
-      doHotItems();
+      // doHotItems();
       //         
       //         doScenario();
    }
@@ -52,8 +55,8 @@ public class Main {
    private static void doHotItems() throws CommandExecutionException, MalformedURLException {
       HotCommand hotCommand = new HotCommand();
       Items items = hotCommand.execute();
-      
-      for(Item currItem :items.getItems()) {
+
+      for (Item currItem : items.getItems()) {
          System.out.println(currItem.getNames().get(0).getValue() + " " + currItem.getThumbnail());
       }
    }
@@ -105,7 +108,18 @@ public class Main {
 
       Items items = thingCommand.execute();
       for (Item item : items.getItems()) {
-         System.out.println(item.getNames().get(0).getValue() + ": " + item.getThumbnail());
+         HashSet<String> set = new HashSet<String>();
+
+         Statistics stats = item.getStats();
+         for (Rating rating : stats.getRatings()) {
+            for (Rank rank : rating.getRanks()) {
+               set.add(rank.getType());
+            }
+         }
+         for (String linktype : set) {
+            System.out.println(linktype);
+         }
+
       }
    }
 
@@ -180,7 +194,7 @@ public class Main {
             System.out.println("Name: " + name.getValue());
          }
 
-         for (Link link : currItem.getLink()) {
+         for (Link link : currItem.getLinks()) {
             System.out.println("Link: " + link.getValue() + " | " + link.getType());
          }
       }
@@ -191,6 +205,7 @@ public class Main {
       //      forumListCommand.setType("thing");
 
       Forums forumList = forumListCommand.execute();
+      System.out.println(forumList.getType());
       for (Forum item : forumList.getForums()) {
          System.out.println(item.getTitle() + " - " + item.getDescription() + " (" + item.getNumThreads() + ")");
       }
