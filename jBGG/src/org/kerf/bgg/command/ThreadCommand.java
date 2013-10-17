@@ -1,0 +1,61 @@
+package org.kerf.bgg.command;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.kerf.bgg.jaxb.ForumThread;
+
+public class ThreadCommand extends Command {
+
+   public ThreadCommand() {
+      command = "thread";
+   }
+
+   @Override
+   protected Class getReturnType() {
+      return ForumThread.class;
+   }
+   
+   public String getId() {
+      return parameters.getProperty("id");
+   }
+   
+   public void setId(String id) {
+      parameters.setProperty("id", id);
+   }
+
+   public String getMinArticleId() {
+      return parameters.getProperty("minarticleid");
+   }
+   
+   public void setMinArticleId(String id) {
+      parameters.setProperty("minarticleid", id);
+   }
+   
+   public void setMinArticleDate(Date date) {
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      parameters.setProperty("minarticledate", dateFormat.format(date));
+   }
+   
+   public Date getMinArticleDate() throws ParseException {
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      return dateFormat.parse(parameters.getProperty("minarticledate"));
+   }
+   public String getCount() {
+      return parameters.getProperty("count");
+   }
+
+   public void setCount(Boolean count) {
+      parameters.setProperty("count", count.toString());
+   }
+
+   public String getUsername() {
+      return parameters.getProperty("username");
+   }
+
+   public void setUsername(String username) {
+      parameters.setProperty("username", username);
+   }
+
+}
