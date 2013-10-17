@@ -53,13 +53,13 @@ public class Main {
 
    private static void doThing() throws IOException, JAXBException {
       ThingCommand thingCommand = new ThingCommand("31260");
-      thingCommand.setComments(true);
-      thingCommand.setHistorical(true);
-      thingCommand.setMarketplace(true);
+//      thingCommand.setComments(true);
+//      thingCommand.setHistorical(true);
+//      thingCommand.setMarketplace(true);
       thingCommand.setRatingComments(true);
-      thingCommand.setStats(true);
-      thingCommand.setVersions(true);
-      thingCommand.setVideos(true);
+ //     thingCommand.setStats(true);
+ //     thingCommand.setVersions(true);
+//      thingCommand.setVideos(true);
 
       Items items = thingCommand.execute();
    }

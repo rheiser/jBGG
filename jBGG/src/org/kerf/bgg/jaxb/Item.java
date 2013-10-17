@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
+import org.eclipse.persistence.oxm.annotations.XmlPath;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item {
    @XmlAttribute(name = "id")
@@ -42,6 +44,18 @@ public class Item {
    @XmlElement(name = "yearpublished")
    Year yearPublished;
 
+   @XmlPath("minplayers/@value")
+   Integer minimumPlayers;
+
+   @XmlPath("maxplayers/@value")
+   Integer maximumPlayers;
+
+   @XmlPath("minage/@value")
+   Integer minimumAge;
+
+   @XmlPath("playingtime/@value")
+   Integer playingTime;
+
    @XmlElement
    URL image;
 
@@ -51,7 +65,7 @@ public class Item {
    @XmlElement
    List<Link> link;
 
-   @XmlElement(name = "stats")
+   @XmlElement(name = "statistics")
    Statistics stats;
 
    @XmlElement
@@ -59,6 +73,28 @@ public class Item {
 
    @XmlElement(name = "numplays")
    Integer numPlays;
+
+   @XmlElement(name = "poll")
+   List<Poll> polls;
+
+   @XmlElementWrapper(name = "versions")
+   @XmlElement(name = "item")
+   List<Item> versions;
+
+   @XmlPath("productcode/@value")
+   String productCode;
+
+   @XmlPath("length/@value")
+   Float length;
+  
+   @XmlPath("width/@value")
+   Float width;
+   
+   @XmlPath("depth/@value")
+   Float depth;
+   
+   @XmlPath("weight/@value")
+   Float weight;
 
    public String getObjectType() {
       return objectType;
