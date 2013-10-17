@@ -1,15 +1,18 @@
 package org.kerf.bgg.command;
 
 import org.kerf.bgg.jaxb.Guild;
+import org.kerf.bgg.type.SortType;
 
 public class GuildsCommand extends Command {
 
-   public GuildsCommand() {
+   public GuildsCommand(String id) {
       command = "guilds";
+      
+      setId(id);
    }
 
    @Override
-   protected Class getReturnType() {
+   protected Class<Guild> getReturnType() {
       return Guild.class;
    }
 
@@ -29,13 +32,12 @@ public class GuildsCommand extends Command {
       parameters.setProperty("members", convertBoolean(members));
    }
 
-   // TODO - enum? (username, date)
-   public String getSort() {
-      return parameters.getProperty("sort");
+   public SortType getSort() {
+      return SortType.valueOf(parameters.getProperty("sort"));
    }
 
-   public void setSort(String sort) {
-      parameters.setProperty("sort", sort);
+   public void setSort(SortType sort) {
+      parameters.setProperty("sort", sort.name());
    }
 
    public Integer getPage() {

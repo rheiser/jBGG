@@ -1,15 +1,18 @@
 package org.kerf.bgg.command;
 
 import org.kerf.bgg.jaxb.User;
+import org.kerf.bgg.type.Domain;
 
 public class UsersCommand extends Command {
 
-   public UsersCommand() {
+   public UsersCommand(String name) {
       command = "users";
+      
+      setName(name);
    }
 
    @Override
-   protected Class getReturnType() {
+   protected Class<User> getReturnType() {
       return User.class;
    }
 
@@ -53,12 +56,12 @@ public class UsersCommand extends Command {
       parameters.setProperty("top", convertBoolean(b));
    }
 
-   public String getDomain() {
-      return parameters.getProperty("domain");
+   public Domain getDomain() {
+      return Domain.valueOf(parameters.getProperty("domain"));
    }
 
-   public void setDomain(String domain) {
-      parameters.setProperty("domain", domain);
+   public void setDomain(Domain domain) {
+      parameters.setProperty("domain", domain.name());
    }
 
    public Integer getPage() {

@@ -21,8 +21,8 @@ public class Forums {
    @XmlAttribute(name="termsofuse")
    URL termsOfUse;
    
-   @XmlElement
-   List<Forum> forum;
+   @XmlElement(name="forum")
+   List<Forum> forums;
 
    public String getType() {
       return type;
@@ -48,11 +48,11 @@ public class Forums {
       this.termsOfUse = termsOfUse;
    }
 
-   public List<Forum> getForum() {
-      return forum;
+   public List<Forum> getForums() {
+      return forums;
    }
 
-   public void setForum(List<Forum> forum) {
-      this.forum = forum;
+   public void setForums(List<Forum> forum) {
+      this.forums = forum;
    }
 }

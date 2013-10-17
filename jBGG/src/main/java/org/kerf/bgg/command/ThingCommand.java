@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.kerf.bgg.jaxb.Items;
+import org.kerf.bgg.type.ThingType;
 
 public class ThingCommand extends Command {
 
@@ -28,7 +29,7 @@ public class ThingCommand extends Command {
    }
 
    @Override
-   protected Class getReturnType() {
+   protected Class<Items> getReturnType() {
       return Items.class;
    }
 
@@ -40,12 +41,12 @@ public class ThingCommand extends Command {
       parameters.setProperty("id", id);
    }
 
-   public String getType() {
-      return parameters.getProperty("type");
+   public ThingType getType() {
+      return ThingType.valueOf(parameters.getProperty("type"));
    }
 
-   public void setType(String type) {
-      parameters.setProperty("type", type);
+   public void setType(ThingType type) {
+      parameters.setProperty("type", type.name());
    }
 
    public Boolean getVersions() {

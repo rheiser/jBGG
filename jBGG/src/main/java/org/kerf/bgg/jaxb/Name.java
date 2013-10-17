@@ -3,13 +3,14 @@ package org.kerf.bgg.jaxb;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+
+import org.kerf.bgg.type.NameType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Name {
 
 	@XmlAttribute
-	String type;
+	NameType type;
 	
 	@XmlAttribute
 	String value;
@@ -17,11 +18,11 @@ public class Name {
 	@XmlAttribute(name="sortindex")
 	Integer sortIndex;
 	
-	public String getType() {
+	public NameType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(NameType type) {
 		this.type = type;
 	}
 

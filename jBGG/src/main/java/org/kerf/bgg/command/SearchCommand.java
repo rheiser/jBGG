@@ -1,14 +1,17 @@
 package org.kerf.bgg.command;
 
 import org.kerf.bgg.jaxb.Items;
+import org.kerf.bgg.type.ThingType;
 
 public class SearchCommand extends Command {
 
-   public SearchCommand() {
+   public SearchCommand(String query) {
       command = "search";
+      
+      setQuery(query);
    }
 
-   protected Class getReturnType() {
+   protected Class<Items> getReturnType() {
       return Items.class;
    }
 
@@ -28,12 +31,12 @@ public class SearchCommand extends Command {
       parameters.put("exact", convertBoolean(exact));
    }
 
-   public String getItemType() {
-      return parameters.getProperty("type");
+   public ThingType getType() {
+      return ThingType.valueOf(parameters.getProperty("type"));
    }
 
-   public void setItemType(String itemType) {
-      parameters.put("type", itemType);
+   public void setType(ThingType itemType) {
+      parameters.put("type", itemType.name());
    }
 
 }

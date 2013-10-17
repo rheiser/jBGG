@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.kerf.bgg.jaxb.adapter.LongDateAdapter;
+import org.kerf.bgg.type.GuildCategory;
 
 @XmlRootElement(name = "guild")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -28,9 +29,8 @@ public class Guild {
    @XmlAttribute(name = "termsofuse")
    URL termsOfUse;
 
-   // TODO - enum?
    @XmlElement
-   String category;
+   GuildCategory category;
 
    @XmlElement
    URL website;
@@ -76,11 +76,11 @@ public class Guild {
       this.termsOfUse = termsOfUse;
    }
 
-   public String getCategory() {
+   public GuildCategory getCategory() {
       return category;
    }
 
-   public void setCategory(String category) {
+   public void setCategory(GuildCategory category) {
       this.category = category;
    }
 

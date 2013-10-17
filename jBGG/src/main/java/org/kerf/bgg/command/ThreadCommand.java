@@ -10,12 +10,14 @@ public class ThreadCommand extends Command {
 
    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-   public ThreadCommand() {
+   public ThreadCommand(String id) {
       command = "thread";
+      
+      setId(id);
    }
 
    @Override
-   protected Class getReturnType() {
+   protected Class<ForumThread> getReturnType() {
       return ForumThread.class;
    }
    

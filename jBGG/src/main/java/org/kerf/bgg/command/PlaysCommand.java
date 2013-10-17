@@ -5,17 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.kerf.bgg.jaxb.Plays;
+import org.kerf.bgg.type.ThingType;
+import org.kerf.bgg.type.Type;
 
 public class PlaysCommand extends Command {
 
    private final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 
-   public PlaysCommand() {
+   public PlaysCommand(String username) {
       command = "plays";
+      
+      setUsername(username);
    }
 
    @Override
-   protected Class getReturnType() {
+   protected Class<Plays> getReturnType() {
       return Plays.class;
    }
 
@@ -35,20 +39,20 @@ public class PlaysCommand extends Command {
       parameters.setProperty("id", id);
    }
 
-   public String getType() {
-      return parameters.getProperty("type");
+   public Type getType() {
+      return Type.valueOf(parameters.getProperty("type"));
    }
 
-   public void setType(String type) {
-      parameters.setProperty("type", type);
+   public void setType(Type type) {
+      parameters.setProperty("type", type.name());
    }
 
-   public String getSubtype() {
-      return parameters.getProperty("subtype");
+   public ThingType getSubtype() {
+      return ThingType.valueOf(parameters.getProperty("subtype"));
    }
 
-   public void setSubtype(String subtype) {
-      parameters.setProperty("subtype", subtype);
+   public void setSubtype(ThingType subtype) {
+      parameters.setProperty("subtype", subtype.name());
    }
 
    public Date getMindate() throws ParseException {

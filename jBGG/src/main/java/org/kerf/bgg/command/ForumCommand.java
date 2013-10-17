@@ -4,11 +4,13 @@ import org.kerf.bgg.jaxb.Forum;
 
 public class ForumCommand extends Command {
 
-   public ForumCommand() {
+   public ForumCommand(String id) {
       command="forum";
+      
+      setId(id);
    }
    @Override
-   protected Class getReturnType() {
+   protected Class<Forum> getReturnType() {
       return Forum.class;
    }
 
@@ -20,8 +22,7 @@ public class ForumCommand extends Command {
       parameters.setProperty("id", parameters.getProperty("id") + ", " + id);
    }
 
-   // FIXME - Return a List instead?
-   public String getId() {
+  public String getId() {
       return parameters.getProperty("id");
    }
 
