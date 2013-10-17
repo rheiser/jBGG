@@ -1,47 +1,139 @@
 package org.kerf.bgg.command;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.kerf.bgg.jaxb.Items;
 
-/*
-
-id=NNN    Specifies the id of the thing(s) to retrieve. To request multiple things with a single query, NNN can specify a comma-delimited list of ids.
-type=THINGTYPE  Specifies that, regardless of the type of thing asked for by id, the results are filtered by the THINGTYPE(s) specified. Multiple THINGTYPEs can be specified in a comma-delimited list.
-versions=1   Returns version info for the item.
-videos = 1   Returns videos for the item.
-stats=1   Returns ranking and rating stats for the item.
-historical=1    Returns historical data over time. See page parameter.
-marketplace=1   Returns marketplace data.
-comments=1   Returns all comments about the item. Also includes ratings when commented. See page parameter.
-ratingcomments=1   Returns all ratings for the item. Also includes comments when rated. See page parameter. The ratingcomments and comments parameters cannot be used together, as the output always appears in the <comments> node of the XML; comments parameter takes precedence if both are specified. Ratings are sorted in descending rating value, based on the highest rating they have assigned to that item (each item in the collection can have a different rating).
-page=NNN  Defaults to 1, controls the page of data to see for historical info, comments, and ratings data.
-pagesize=NNN    Set the number of records to return in paging. Minimum is 10, maximum is 100.
-from=YYYY-MM-DD   Not currently supported.
-to=YYYY-MM-DD  Not currently supported.
-
- */
 public class ThingCommand extends Command {
+
+   private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
    public ThingCommand(String id) {
       command = "thing";
-      
+
       parameters.put("id", id);
    }
-   
+
    public ThingCommand(List<String> ids) {
       String idList = "";
-      
-      for(String currId : ids) {
+
+      for (String currId : ids) {
          idList += currId + ",";
       }
-      
+
       parameters.put("id", idList);
    }
 
    @Override
    protected Class getReturnType() {
       return Items.class;
+   }
+
+   public String getId() {
+      return parameters.getProperty("id");
+   }
+
+   public void setId(String id) {
+      parameters.setProperty("id", id);
+   }
+
+   public String getType() {
+      return parameters.getProperty("type");
+   }
+
+   public void setType(String type) {
+      parameters.setProperty("type", type);
+   }
+
+   public Boolean getVersions() {
+      return Boolean.parseBoolean(parameters.getProperty("versions"));
+   }
+
+   public void setVersions(Boolean versions) {
+      parameters.setProperty("versions", convertBoolean(versions));
+   }
+
+   public Boolean getVideos() {
+      return Boolean.parseBoolean(parameters.getProperty("videos"));
+   }
+
+   public void setVideos(Boolean videos) {
+      parameters.setProperty("videos", convertBoolean(videos));
+   }
+
+   public Boolean getStats() {
+      return Boolean.parseBoolean(parameters.getProperty("stats"));
+   }
+
+   public void setStats(Boolean stats) {
+      parameters.setProperty("stats", convertBoolean(stats));
+   }
+
+   public Boolean getHistorical() {
+      return Boolean.parseBoolean(parameters.getProperty("historical"));
+   }
+
+   public void setHistorical(Boolean historical) {
+      parameters.setProperty("historical", convertBoolean(historical));
+   }
+
+   public Boolean getMarketplace() {
+      return Boolean.parseBoolean(parameters.getProperty("marketplace"));
+   }
+
+   public void setMarketplace(Boolean marketplace) {
+      parameters.setProperty("marketplace", convertBoolean(marketplace));
+   }
+
+   public Boolean getComments() {
+      return Boolean.parseBoolean(parameters.getProperty("comments"));
+   }
+
+   public void setComments(Boolean comments) {
+      parameters.setProperty("comments", convertBoolean(comments));
+   }
+
+   public Boolean getRatingComments() {
+      return Boolean.parseBoolean(parameters.getProperty("ratingcomments"));
+   }
+
+   public void setRatingComments(Boolean ratingcomments) {
+      parameters.setProperty("ratingcomments", convertBoolean(ratingcomments));
+   }
+
+   public Integer getPage() {
+      return Integer.parseInt(parameters.getProperty("page"));
+   }
+
+   public void setPage(Integer page) {
+      parameters.setProperty("page", page.toString());
+   }
+
+   public Integer getPageSize() {
+      return Integer.parseInt(parameters.getProperty("pagesize"));
+   }
+
+   public void setPageSize(Integer pagesize) {
+      parameters.setProperty("pagesize", pagesize.toString());
+   }
+
+   public Date getFrom() throws ParseException {
+      return dateFormat.parse(parameters.getProperty("from"));
+   }
+
+   public void setFrom(Date from) {
+      parameters.setProperty("from", dateFormat.format(from));
+   }
+
+   public Date getTo() throws ParseException {
+      return dateFormat.parse(parameters.getProperty("to"));
+   }
+
+   public void setTo(Date to) {
+      parameters.setProperty("to", dateFormat.format(to));
    }
 
 }

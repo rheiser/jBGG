@@ -1,45 +1,46 @@
 package org.kerf.bgg;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBException;
 
-import org.kerf.bgg.command.BoardgameCommand;
 import org.kerf.bgg.command.CollectionCommand;
 import org.kerf.bgg.command.FamilyCommand;
 import org.kerf.bgg.command.ForumCommand;
 import org.kerf.bgg.command.ForumListCommand;
+import org.kerf.bgg.command.GuildsCommand;
+import org.kerf.bgg.command.PlaysCommand;
 import org.kerf.bgg.command.SearchCommand;
+import org.kerf.bgg.command.ThingCommand;
 import org.kerf.bgg.command.ThreadCommand;
 import org.kerf.bgg.command.UsersCommand;
 import org.kerf.bgg.jaxb.Article;
-import org.kerf.bgg.jaxb.Boardgame;
-import org.kerf.bgg.jaxb.Boardgames;
 import org.kerf.bgg.jaxb.Forum;
 import org.kerf.bgg.jaxb.ForumThread;
 import org.kerf.bgg.jaxb.Forums;
+import org.kerf.bgg.jaxb.Guild;
 import org.kerf.bgg.jaxb.Item;
 import org.kerf.bgg.jaxb.Items;
 import org.kerf.bgg.jaxb.Link;
 import org.kerf.bgg.jaxb.Name;
+import org.kerf.bgg.jaxb.Plays;
 import org.kerf.bgg.jaxb.User;
 
 public class Main {
 
    static public void main(String[] args) {
       try {
-         // Items boardgames = doSearch();
-         // Item boardgame = boardgames.getItems().get(0);
-         // doBoardgame(boardgame);
+         doThing();
+         // doSearch();
          // doCollection();
          // doThread();
          // doFamily();
          // doForumList();
          // doForum();
          // doThread();
-         doUsers();
+         // doUsers();
+         // doGuilds();
+         // doPlays();
       } catch (IOException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -48,6 +49,28 @@ public class Main {
          e.printStackTrace();
       }
 
+   }
+
+   private static void doThing() throws IOException, JAXBException {
+      ThingCommand thingCommand = new ThingCommand("31260");
+      thingCommand.setComments(true);
+      thingCommand.setHistorical(true);
+      thingCommand.setMarketplace(true);
+      thingCommand.setRatingComments(true);
+      thingCommand.setStats(true);
+      thingCommand.setVersions(true);
+      thingCommand.setVideos(true);
+
+      Items items = thingCommand.execute();
+   }
+
+   private static void doPlays() throws IOException, JAXBException {
+      PlaysCommand playsCommand = new PlaysCommand();
+      playsCommand.setUsername("rheiser");
+
+      Plays plays = playsCommand.execute();
+
+      System.out.println(plays.getUsername() + " has " + plays.getTotal() + " plays");
    }
 
    private static void doForum() throws IOException, JAXBException {
@@ -76,17 +99,25 @@ public class Main {
    private static void doUsers() throws IOException, JAXBException {
       UsersCommand usersCommand = new UsersCommand();
       usersCommand.setName("rheiser");
-//      usersCommand.setBuddies(false);
-//      usersCommand.setGuilds(true);
-//      usersCommand.setHot(true);
-//      usersCommand.setTop(true);
-      
+      // usersCommand.setBuddies(false);
+      // usersCommand.setGuilds(true);
+      // usersCommand.setHot(true);
+      // usersCommand.setTop(true);
+
       User user = usersCommand.execute();
-      
-      System.out.println("User: " + user.getFirstname() + " " + user.getLastname());
+
+      System.out.println("User: " + user.getFirstname() + " " + user.getLastname() + " | " + user.getCountry());
    }
-   
-   
+
+   private static void doGuilds() throws IOException, JAXBException {
+      GuildsCommand guildsCommand = new GuildsCommand();
+      guildsCommand.setId("1145");
+
+      Guild guild = guildsCommand.execute();
+
+      System.out.println(guild.getName() + " (" + guild.getManager() + ") | " + guild.getDescription());
+   }
+
    private static void doCollection() throws IOException, JAXBException {
       CollectionCommand collectionCommand = new CollectionCommand("rheiser");
       // collectionCommand.setOwn(true);
@@ -128,29 +159,7 @@ public class Main {
       }
    }
 
-   private static void doBoardgame(Item boardgame) throws IOException, JAXBException {
-      BoardgameCommand boardgameCommand = new BoardgameCommand();
-      boardgameCommand.setGameId(boardgame.getObjectId());
-      boardgameCommand.setComments(true);
-      boardgameCommand.setStats(true);
-      boardgameCommand.setHistorical(true);
-      Calendar calendar = GregorianCalendar.getInstance();
-      calendar.set(2009, 1, 1);
-      boardgameCommand.setFrom(calendar.getTime());
-
-      calendar.set(2009, 03, 17);
-      boardgameCommand.setTo(calendar.getTime());
-
-      Boardgames agricola = boardgameCommand.execute();
-      for (Boardgame game : agricola.getBoardgames()) {
-         for (Name name : game.getName()) {
-            System.out.println("NAME: " + name.getValue());
-         }
-         System.out.println("DESC: " + game.getDescription());
-      }
-   }
-
-   private static Items doSearch() throws IOException, JAXBException {
+   private static void doSearch() throws IOException, JAXBException {
       SearchCommand searchCommand = new SearchCommand();
       searchCommand.setQuery("Agricola");
       searchCommand.setExact(Boolean.FALSE);
@@ -166,7 +175,6 @@ public class Main {
                      .getValue() : item.getYearPublished().getText()) : "not specified"));
          System.out.println("ID: " + item.getId());
       }
-      return boardgames;
    }
 
 }

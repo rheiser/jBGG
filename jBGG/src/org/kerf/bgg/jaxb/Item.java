@@ -7,15 +7,16 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item {
    @XmlAttribute(name = "id")
    String id;
 
-   @XmlAttribute(name = "type") 
+   @XmlAttribute(name = "type")
    String type;
-   
+
    @XmlAttribute(name = "objecttype")
    String objectType;
 
@@ -25,12 +26,16 @@ public class Item {
    @XmlAttribute(name = "subtype")
    String subType;
 
+   @XmlElementWrapper(name = "subtypes")
+   @XmlElement(name = "subtype")
+   List<String> subtypes;
+
    @XmlAttribute(name = "collid")
    String collectionId;
 
    @XmlElement
    List<Name> name;
-   
+
    @XmlElement
    String description;
 
@@ -45,7 +50,7 @@ public class Item {
 
    @XmlElement
    List<Link> link;
-   
+
    @XmlElement(name = "stats")
    Statistics stats;
 
@@ -66,19 +71,19 @@ public class Item {
    public String getId() {
       return id;
    }
-   
+
    public void setId(String id) {
       this.id = id;
    }
-   
+
    public String getType() {
       return type;
    }
-   
+
    public void setType(String type) {
       this.type = type;
    }
-   
+
    public String getObjectId() {
       return objectId;
    }
@@ -93,6 +98,14 @@ public class Item {
 
    public void setSubType(String subType) {
       this.subType = subType;
+   }
+
+   public List<String> getSubtypes() {
+      return subtypes;
+   }
+
+   public void setSubtypes(List<String> subtypes) {
+      this.subtypes = subtypes;
    }
 
    public String getCollectionId() {

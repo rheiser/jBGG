@@ -8,6 +8,8 @@ import org.kerf.bgg.jaxb.ForumThread;
 
 public class ThreadCommand extends Command {
 
+   private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
    public ThreadCommand() {
       command = "thread";
    }
@@ -34,12 +36,10 @@ public class ThreadCommand extends Command {
    }
    
    public void setMinArticleDate(Date date) {
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       parameters.setProperty("minarticledate", dateFormat.format(date));
    }
    
    public Date getMinArticleDate() throws ParseException {
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       return dateFormat.parse(parameters.getProperty("minarticledate"));
    }
    public String getCount() {
