@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.util.Date;
@@ -48,83 +65,83 @@ public class Play {
    @XmlElement(name = "player")
    List<Player> players;
 
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
+   public String getComments() {
+      return comments;
    }
 
    public Date getDate() {
       return date;
    }
 
-   public void setDate(Date date) {
-      this.date = date;
-   }
-
-   public Integer getQuantity() {
-      return quantity;
-   }
-
-   public void setQuantity(Integer quantity) {
-      this.quantity = quantity;
-   }
-
-   public Integer getLength() {
-      return length;
-   }
-
-   public void setLength(Integer length) {
-      this.length = length;
+   public String getId() {
+      return id;
    }
 
    public Boolean getIncomplete() {
       return incomplete;
    }
 
-   public void setIncomplete(Boolean incomplete) {
-      this.incomplete = incomplete;
+   public Item getItem() {
+      return item;
    }
 
-   public Boolean getNoWinStats() {
-      return noWinStats;
-   }
-
-   public void setNoWinStats(Boolean noWinStats) {
-      this.noWinStats = noWinStats;
+   public Integer getLength() {
+      return length;
    }
 
    public String getLocation() {
       return location;
    }
 
-   public void setLocation(String location) {
-      this.location = location;
-   }
-
-   public Item getItem() {
-      return item;
-   }
-
-   public void setItem(Item item) {
-      this.item = item;
-   }
-
-   public String getComments() {
-      return comments;
-   }
-
-   public void setComments(String comments) {
-      this.comments = comments;
+   public Boolean getNoWinStats() {
+      return noWinStats;
    }
 
    public List<Player> getPlayers() {
       return players;
    }
 
+   public Integer getQuantity() {
+      return quantity;
+   }
+
+   public void setComments(String comments) {
+      this.comments = comments;
+   }
+
+   public void setDate(Date date) {
+      this.date = date;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   public void setIncomplete(Boolean incomplete) {
+      this.incomplete = incomplete;
+   }
+
+   public void setItem(Item item) {
+      this.item = item;
+   }
+
+   public void setLength(Integer length) {
+      this.length = length;
+   }
+
+   public void setLocation(String location) {
+      this.location = location;
+   }
+
+   public void setNoWinStats(Boolean noWinStats) {
+      this.noWinStats = noWinStats;
+   }
+
    public void setPlayers(List<Player> players) {
       this.players = players;
+   }
+
+   public void setQuantity(Integer quantity) {
+      this.quantity = quantity;
    }
 }

@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.util.Date;
@@ -11,107 +28,107 @@ import org.kerf.bgg.jaxb.adapter.DateTimeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Status {
-	// <status own="1" prevowned="0" fortrade="0" want="0" wanttoplay="0"
-	// wanttobuy="0" wishlist="0" preordered="0"
-	// lastmodified="2008-08-09 18:25:32"/>
-	@XmlAttribute
-	Boolean own;
+   // <status own="1" prevowned="0" fortrade="0" want="0" wanttoplay="0"
+   // wanttobuy="0" wishlist="0" preordered="0"
+   // lastmodified="2008-08-09 18:25:32"/>
+   @XmlAttribute
+   Boolean own;
 
-	@XmlAttribute(name = "prevowned")
-	Boolean previouslyOwned;
+   @XmlAttribute(name = "prevowned")
+   Boolean previouslyOwned;
 
-	@XmlAttribute(name = "fortrade")
-	Boolean tradeable;
+   @XmlAttribute(name = "fortrade")
+   Boolean tradeable;
 
-	@XmlAttribute
-	Boolean want;
+   @XmlAttribute
+   Boolean want;
 
-	@XmlAttribute(name = "wanttoplay")
-	Boolean wantToPlay;
+   @XmlAttribute(name = "wanttoplay")
+   Boolean wantToPlay;
 
-	@XmlAttribute(name = "wanttobuy")
-	Boolean wantToBuy;
+   @XmlAttribute(name = "wanttobuy")
+   Boolean wantToBuy;
 
-	@XmlAttribute
-	Boolean wishlist;
+   @XmlAttribute
+   Boolean wishlist;
 
-	@XmlAttribute
-	Boolean preordered;
+   @XmlAttribute
+   Boolean preordered;
 
-	@XmlAttribute(name = "lastmodified")
-	@XmlJavaTypeAdapter(DateTimeAdapter.class)
-	Date lastModified;
+   @XmlAttribute(name = "lastmodified")
+   @XmlJavaTypeAdapter(DateTimeAdapter.class)
+   Date lastModified;
 
-	public Boolean getOwn() {
-		return own;
-	}
+   public Date getLastModified() {
+      return lastModified;
+   }
 
-	public void setOwn(Boolean own) {
-		this.own = own;
-	}
+   public Boolean getOwn() {
+      return own;
+   }
 
-	public Boolean getPreviouslyOwned() {
-		return previouslyOwned;
-	}
+   public Boolean getPreordered() {
+      return preordered;
+   }
 
-	public void setPreviouslyOwned(Boolean previouslyOwned) {
-		this.previouslyOwned = previouslyOwned;
-	}
+   public Boolean getPreviouslyOwned() {
+      return previouslyOwned;
+   }
 
-	public Boolean getTradeable() {
-		return tradeable;
-	}
+   public Boolean getTradeable() {
+      return tradeable;
+   }
 
-	public void setTradeable(Boolean tradeable) {
-		this.tradeable = tradeable;
-	}
+   public Boolean getWant() {
+      return want;
+   }
 
-	public Boolean getWant() {
-		return want;
-	}
+   public Boolean getWantToBuy() {
+      return wantToBuy;
+   }
 
-	public void setWant(Boolean want) {
-		this.want = want;
-	}
+   public Boolean getWantToPlay() {
+      return wantToPlay;
+   }
 
-	public Boolean getWantToPlay() {
-		return wantToPlay;
-	}
+   public Boolean getWishlist() {
+      return wishlist;
+   }
 
-	public void setWantToPlay(Boolean wantToPlay) {
-		this.wantToPlay = wantToPlay;
-	}
+   public void setLastModified(Date lastModified) {
+      this.lastModified = lastModified;
+   }
 
-	public Boolean getWantToBuy() {
-		return wantToBuy;
-	}
+   public void setOwn(Boolean own) {
+      this.own = own;
+   }
 
-	public void setWantToBuy(Boolean wantToBuy) {
-		this.wantToBuy = wantToBuy;
-	}
+   public void setPreordered(Boolean preordered) {
+      this.preordered = preordered;
+   }
 
-	public Boolean getWishlist() {
-		return wishlist;
-	}
+   public void setPreviouslyOwned(Boolean previouslyOwned) {
+      this.previouslyOwned = previouslyOwned;
+   }
 
-	public void setWishlist(Boolean wishlist) {
-		this.wishlist = wishlist;
-	}
+   public void setTradeable(Boolean tradeable) {
+      this.tradeable = tradeable;
+   }
 
-	public Boolean getPreordered() {
-		return preordered;
-	}
+   public void setWant(Boolean want) {
+      this.want = want;
+   }
 
-	public void setPreordered(Boolean preordered) {
-		this.preordered = preordered;
-	}
+   public void setWantToBuy(Boolean wantToBuy) {
+      this.wantToBuy = wantToBuy;
+   }
 
-	public Date getLastModified() {
-		return lastModified;
-	}
+   public void setWantToPlay(Boolean wantToPlay) {
+      this.wantToPlay = wantToPlay;
+   }
 
-	public void setLastModified(Date lastModified) {
-		this.lastModified = lastModified;
-	}
+   public void setWishlist(Boolean wishlist) {
+      this.wishlist = wishlist;
+   }
 
 }

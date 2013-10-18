@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
@@ -11,50 +28,50 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.kerf.bgg.type.Type;
 
-@XmlRootElement(name="forums")
+@XmlRootElement(name = "forums")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Forums {
    @XmlAttribute
    Type type;
-   
+
    @XmlAttribute
    String id;
-   
-   @XmlAttribute(name="termsofuse")
+
+   @XmlAttribute(name = "termsofuse")
    URL termsOfUse;
-   
-   @XmlElement(name="forum")
+
+   @XmlElement(name = "forum")
    List<Forum> forums;
 
-   public Type getType() {
-      return type;
-   }
-
-   public void setType(Type type) {
-      this.type = type;
+   public List<Forum> getForums() {
+      return forums;
    }
 
    public String getId() {
       return id;
    }
 
-   public void setId(String id) {
-      this.id = id;
-   }
-
    public URL getTermsOfUse() {
       return termsOfUse;
+   }
+
+   public Type getType() {
+      return type;
+   }
+
+   public void setForums(List<Forum> forum) {
+      this.forums = forum;
+   }
+
+   public void setId(String id) {
+      this.id = id;
    }
 
    public void setTermsOfUse(URL termsOfUse) {
       this.termsOfUse = termsOfUse;
    }
 
-   public List<Forum> getForums() {
-      return forums;
-   }
-
-   public void setForums(List<Forum> forum) {
-      this.forums = forum;
+   public void setType(Type type) {
+      this.type = type;
    }
 }

@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
@@ -12,92 +29,92 @@ import org.kerf.bgg.jaxb.adapter.ArticleDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Video {
-	@XmlAttribute
-	String id;
+   @XmlAttribute
+   String id;
 
-	@XmlAttribute
-	String title;
+   @XmlAttribute
+   String title;
 
-	@XmlAttribute
-	String category;
+   @XmlAttribute
+   String category;
 
-	@XmlAttribute
-	String language;
+   @XmlAttribute
+   String language;
 
-	@XmlAttribute
-	URL link;
+   @XmlAttribute
+   URL link;
 
-	@XmlAttribute
-	String username;
+   @XmlAttribute
+   String username;
 
-	@XmlAttribute(name = "userid")
-	String userId;
+   @XmlAttribute(name = "userid")
+   String userId;
 
-	@XmlAttribute(name = "postdate")
-	@XmlJavaTypeAdapter(ArticleDateAdapter.class)
-	Date postDate;
+   @XmlAttribute(name = "postdate")
+   @XmlJavaTypeAdapter(ArticleDateAdapter.class)
+   Date postDate;
 
-	public String getId() {
-		return id;
-	}
+   public String getCategory() {
+      return category;
+   }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+   public String getId() {
+      return id;
+   }
 
-	public String getTitle() {
-		return title;
-	}
+   public String getLanguage() {
+      return language;
+   }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+   public URL getLink() {
+      return link;
+   }
 
-	public String getCategory() {
-		return category;
-	}
+   public Date getPostDate() {
+      return postDate;
+   }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+   public String getTitle() {
+      return title;
+   }
 
-	public String getLanguage() {
-		return language;
-	}
+   public String getUserId() {
+      return userId;
+   }
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
+   public String getUsername() {
+      return username;
+   }
 
-	public URL getLink() {
-		return link;
-	}
+   public void setCategory(String category) {
+      this.category = category;
+   }
 
-	public void setLink(URL link) {
-		this.link = link;
-	}
+   public void setId(String id) {
+      this.id = id;
+   }
 
-	public String getUsername() {
-		return username;
-	}
+   public void setLanguage(String language) {
+      this.language = language;
+   }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+   public void setLink(URL link) {
+      this.link = link;
+   }
 
-	public String getUserId() {
-		return userId;
-	}
+   public void setPostDate(Date postDate) {
+      this.postDate = postDate;
+   }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+   public void setTitle(String title) {
+      this.title = title;
+   }
 
-	public Date getPostDate() {
-		return postDate;
-	}
+   public void setUserId(String userId) {
+      this.userId = userId;
+   }
 
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
-	}
+   public void setUsername(String username) {
+      this.username = username;
+   }
 }

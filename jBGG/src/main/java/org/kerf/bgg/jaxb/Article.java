@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
@@ -40,68 +57,68 @@ public class Article {
    @XmlElement
    String body;
 
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
-   }
-
-   public String getUsername() {
-      return username;
-   }
-
-   public void setUsername(String username) {
-      this.username = username;
-   }
-
-   public URL getLink() {
-      return link;
-   }
-
-   public void setLink(URL link) {
-      this.link = link;
-   }
-
-   public Date getPostDate() {
-      return postDate;
-   }
-
-   public void setPostDate(Date postDate) {
-      this.postDate = postDate;
+   public String getBody() {
+      return body;
    }
 
    public Date getEditDate() {
       return editDate;
    }
 
-   public void setEditDate(Date editDate) {
-      this.editDate = editDate;
+   public String getId() {
+      return id;
+   }
+
+   public URL getLink() {
+      return link;
    }
 
    public Integer getNumEdits() {
       return numEdits;
    }
 
-   public void setNumEdits(Integer numEdits) {
-      this.numEdits = numEdits;
+   public Date getPostDate() {
+      return postDate;
    }
 
    public String getSubject() {
       return subject;
    }
 
-   public void setSubject(String subject) {
-      this.subject = subject;
-   }
-
-   public String getBody() {
-      return body;
+   public String getUsername() {
+      return username;
    }
 
    public void setBody(String body) {
       this.body = body;
+   }
+
+   public void setEditDate(Date editDate) {
+      this.editDate = editDate;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   public void setLink(URL link) {
+      this.link = link;
+   }
+
+   public void setNumEdits(Integer numEdits) {
+      this.numEdits = numEdits;
+   }
+
+   public void setPostDate(Date postDate) {
+      this.postDate = postDate;
+   }
+
+   public void setSubject(String subject) {
+      this.subject = subject;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
    }
 
 }

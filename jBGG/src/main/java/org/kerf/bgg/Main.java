@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg;
 
 import java.net.MalformedURLException;
@@ -36,20 +53,62 @@ import org.kerf.bgg.type.Type;
 
 public class Main {
 
-   static public void main(String[] args) throws Exception {
-      doThing();
-      //         doSearch();
-      //         doCollection();
-      //         doFamily();
-      //         doForumList();
-      //         doForum();
-      //         doThread();
-      //         doUsers();
-      //         doGuilds();
-      //         doPlays();
-      // doHotItems();
-      //         
-      //         doScenario();
+   private static void doCollection() throws CommandExecutionException {
+      CollectionCommand collectionCommand = new CollectionCommand("rheiser");
+      // collectionCommand.setOwn(true);
+      // collectionCommand.setMinplays(5);
+      collectionCommand.setRated(true);
+      Items collection = collectionCommand.execute();
+      for (Item item : collection.getItems()) {
+         for (Name name : item.getNames()) {
+            System.out.println(name.getValue() + " (image: " + item.getImage() + ")");
+         }
+      }
+   }
+
+   private static void doFamily() throws CommandExecutionException {
+      FamilyCommand familyCommand = new FamilyCommand("17106");// Android 
+
+      Items families = familyCommand.execute();
+
+      for (Item currItem : families.getItems()) {
+         for (Name name : currItem.getNames()) {
+            System.out.println("Name: " + name.getValue());
+         }
+
+         for (Link link : currItem.getLinks()) {
+            System.out.println("Link: " + link.getValue() + " | " + link.getType());
+         }
+      }
+   }
+
+   private static void doForum() throws CommandExecutionException {
+      ForumCommand forumCommand = new ForumCommand("285");
+
+      Forum forum = forumCommand.execute();
+
+      for (ForumThread thread : forum.getThreads()) {
+         System.out.println(thread.getSubject() + ": " + thread.getAuthor() + " | " + thread.getNumArticles());
+      }
+   }
+
+   private static void doForumList() throws CommandExecutionException {
+      ForumListCommand forumListCommand = new ForumListCommand("31260", Type.thing); // Agricola
+      // forumListCommand.setType("thing");
+
+      Forums forumList = forumListCommand.execute();
+      System.out.println(forumList.getType());
+      for (Forum item : forumList.getForums()) {
+         System.out.println(item.getTitle() + " - " + item.getDescription() + " (" + item.getNumThreads() + ")");
+      }
+   }
+
+   private static void doGuilds() throws CommandExecutionException {
+      GuildsCommand guildsCommand = new GuildsCommand("1145");
+
+      Guild guild = guildsCommand.execute();
+
+      System.out.println(guild.getName() + " (" + guild.getManager() + ") | " + guild.getDescription());
    }
 
    private static void doHotItems() throws CommandExecutionException, MalformedURLException {
@@ -59,6 +118,14 @@ public class Main {
       for (Item currItem : items.getItems()) {
          System.out.println(currItem.getNames().get(0).getValue() + " " + currItem.getThumbnail());
       }
+   }
+
+   private static void doPlays() throws CommandExecutionException {
+      PlaysCommand playsCommand = new PlaysCommand("rheiser");
+
+      Plays plays = playsCommand.execute();
+
+      System.out.println(plays.getUsername() + " has " + plays.getTotal() + " plays");
    }
 
    private static void doScenario() throws CommandExecutionException {
@@ -96,6 +163,23 @@ public class Main {
 
    }
 
+   private static void doSearch() throws CommandExecutionException {
+      SearchCommand searchCommand = new SearchCommand("Agricola");
+      // searchCommand.setExact(Boolean.FALSE);
+
+      Items boardgames = searchCommand.execute();
+
+      for (Item item : boardgames.getItems()) {
+         for (Name currName : item.getNames()) {
+            System.out.println("Name: " + currName.getValue());
+         }
+         System.out.println("Year: "
+               + (item.getYearPublished() != null ? (item.getYearPublished().getText().equals("") ? item.getYearPublished()
+                     .getValue() : item.getYearPublished().getText()) : "not specified"));
+         System.out.println("ID: " + item.getId());
+      }
+   }
+
    private static void doThing() throws CommandExecutionException, MalformedURLException {
       ThingCommand thingCommand = new ThingCommand("31260");
       thingCommand.setComments(true);
@@ -123,31 +207,13 @@ public class Main {
       }
    }
 
-   private static void doPlays() throws CommandExecutionException {
-      PlaysCommand playsCommand = new PlaysCommand("rheiser");
-
-      Plays plays = playsCommand.execute();
-
-      System.out.println(plays.getUsername() + " has " + plays.getTotal() + " plays");
-   }
-
-   private static void doForum() throws CommandExecutionException {
-      ForumCommand forumCommand = new ForumCommand("285");
-
-      Forum forum = forumCommand.execute();
-
-      for (ForumThread thread : forum.getThreads()) {
-         System.out.println(thread.getSubject() + ": " + thread.getAuthor() + " | " + thread.getNumArticles());
-      }
-   }
-
    private static void doThread() throws CommandExecutionException {
       ThreadCommand threadCommand = new ThreadCommand("323972");
 
       ForumThread thread = threadCommand.execute();
       for (Article article : thread.getArticles()) {
          System.out.println(article.getSubject() + " | " + article.getUsername() + " | " + article.getPostDate()
-                  + (article.getPostDate().equals(article.getEditDate()) ? "" : " (" + article.getEditDate() + ")"));
+               + (article.getPostDate().equals(article.getEditDate()) ? "" : " (" + article.getEditDate() + ")"));
       }
    }
 
@@ -163,69 +229,20 @@ public class Main {
       System.out.println("User: " + user.getFirstname() + " " + user.getLastname() + " | " + user.getCountry());
    }
 
-   private static void doGuilds() throws CommandExecutionException {
-      GuildsCommand guildsCommand = new GuildsCommand("1145");
-
-      Guild guild = guildsCommand.execute();
-
-      System.out.println(guild.getName() + " (" + guild.getManager() + ") | " + guild.getDescription());
-   }
-
-   private static void doCollection() throws CommandExecutionException {
-      CollectionCommand collectionCommand = new CollectionCommand("rheiser");
-      // collectionCommand.setOwn(true);
-      // collectionCommand.setMinplays(5);
-      collectionCommand.setRated(true);
-      Items collection = collectionCommand.execute();
-      for (Item item : collection.getItems()) {
-         for (Name name : item.getNames()) {
-            System.out.println(name.getValue() + " (image: " + item.getImage() + ")");
-         }
-      }
-   }
-
-   private static void doFamily() throws CommandExecutionException {
-      FamilyCommand familyCommand = new FamilyCommand("17106");// Android 
-
-      Items families = familyCommand.execute();
-
-      for (Item currItem : families.getItems()) {
-         for (Name name : currItem.getNames()) {
-            System.out.println("Name: " + name.getValue());
-         }
-
-         for (Link link : currItem.getLinks()) {
-            System.out.println("Link: " + link.getValue() + " | " + link.getType());
-         }
-      }
-   }
-
-   private static void doForumList() throws CommandExecutionException {
-      ForumListCommand forumListCommand = new ForumListCommand("31260", Type.thing); // Agricola
-      //      forumListCommand.setType("thing");
-
-      Forums forumList = forumListCommand.execute();
-      System.out.println(forumList.getType());
-      for (Forum item : forumList.getForums()) {
-         System.out.println(item.getTitle() + " - " + item.getDescription() + " (" + item.getNumThreads() + ")");
-      }
-   }
-
-   private static void doSearch() throws CommandExecutionException {
-      SearchCommand searchCommand = new SearchCommand("Agricola");
-      //      searchCommand.setExact(Boolean.FALSE);
-
-      Items boardgames = searchCommand.execute();
-
-      for (Item item : boardgames.getItems()) {
-         for (Name currName : item.getNames()) {
-            System.out.println("Name: " + currName.getValue());
-         }
-         System.out.println("Year: "
-                  + (item.getYearPublished() != null ? (item.getYearPublished().getText().equals("") ? item
-                           .getYearPublished().getValue() : item.getYearPublished().getText()) : "not specified"));
-         System.out.println("ID: " + item.getId());
-      }
+   static public void main(String[] args) throws Exception {
+      doThing();
+       doSearch();
+       doCollection();
+       doFamily();
+       doForumList();
+       doForum();
+       doThread();
+       doUsers();
+       doGuilds();
+       doPlays();
+       doHotItems();
+      
+       doScenario();
    }
 
 }

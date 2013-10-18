@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.util.List;
@@ -10,159 +27,159 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Rating {
-	@XmlAttribute
-	String date;
-	
-	@XmlElement(name="usersrated")
-	Integer usersRated;
-	
-	@XmlElement
-	Integer average;
-	
-	@XmlElement(name="bayesaverage")
-	Integer bayesianAverage;
-	
-	@XmlElementWrapper(name="ranks")
-	@XmlElement(name="rank")
-	List<Rank> ranks;
-	
-	@XmlElement(name="stddev")
-	Integer standardDeviation;
-	
-	@XmlElement
-	Integer median;
-	
-	@XmlElement
-	Integer owned;
-	
-	@XmlElement
-	Integer trading;
-	
-	@XmlElement
-	Integer wanting;
-	
-	@XmlElement
-	Integer wishing;
-	
-	@XmlElement(name="numcomments")
-	Integer numComments;
-	
-	@XmlElement(name="numweights")
-	Integer numWeights;
-	
-	@XmlElement(name="averageweight")
-	Integer averageWeight;
+   @XmlAttribute
+   String date;
 
-	public String getDate() {
-		return date;
-	}
+   @XmlElement(name = "usersrated")
+   Integer usersRated;
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+   @XmlElement
+   Integer average;
 
-	public Integer getUsersRated() {
-		return usersRated;
-	}
+   @XmlElement(name = "bayesaverage")
+   Integer bayesianAverage;
 
-	public void setUsersRated(Integer usersRated) {
-		this.usersRated = usersRated;
-	}
+   @XmlElementWrapper(name = "ranks")
+   @XmlElement(name = "rank")
+   List<Rank> ranks;
 
-	public Integer getAverage() {
-		return average;
-	}
+   @XmlElement(name = "stddev")
+   Integer standardDeviation;
 
-	public void setAverage(Integer average) {
-		this.average = average;
-	}
+   @XmlElement
+   Integer median;
 
-	public Integer getBayesianAverage() {
-		return bayesianAverage;
-	}
+   @XmlElement
+   Integer owned;
 
-	public void setBayesianAverage(Integer bayesianAverage) {
-		this.bayesianAverage = bayesianAverage;
-	}
+   @XmlElement
+   Integer trading;
 
-	public List<Rank> getRanks() {
-		return ranks;
-	}
+   @XmlElement
+   Integer wanting;
 
-	public void setRanks(List<Rank> ranks) {
-		this.ranks = ranks;
-	}
+   @XmlElement
+   Integer wishing;
 
-	public Integer getStandardDeviation() {
-		return standardDeviation;
-	}
+   @XmlElement(name = "numcomments")
+   Integer numComments;
 
-	public void setStandardDeviation(Integer standardDeviation) {
-		this.standardDeviation = standardDeviation;
-	}
+   @XmlElement(name = "numweights")
+   Integer numWeights;
 
-	public Integer getMedian() {
-		return median;
-	}
+   @XmlElement(name = "averageweight")
+   Integer averageWeight;
 
-	public void setMedian(Integer median) {
-		this.median = median;
-	}
+   public Integer getAverage() {
+      return average;
+   }
 
-	public Integer getOwned() {
-		return owned;
-	}
+   public Integer getAverageWeight() {
+      return averageWeight;
+   }
 
-	public void setOwned(Integer owned) {
-		this.owned = owned;
-	}
+   public Integer getBayesianAverage() {
+      return bayesianAverage;
+   }
 
-	public Integer getTrading() {
-		return trading;
-	}
+   public String getDate() {
+      return date;
+   }
 
-	public void setTrading(Integer trading) {
-		this.trading = trading;
-	}
+   public Integer getMedian() {
+      return median;
+   }
 
-	public Integer getWanting() {
-		return wanting;
-	}
+   public Integer getNumComments() {
+      return numComments;
+   }
 
-	public void setWanting(Integer wanting) {
-		this.wanting = wanting;
-	}
+   public Integer getNumWeights() {
+      return numWeights;
+   }
 
-	public Integer getWishing() {
-		return wishing;
-	}
+   public Integer getOwned() {
+      return owned;
+   }
 
-	public void setWishing(Integer wishing) {
-		this.wishing = wishing;
-	}
+   public List<Rank> getRanks() {
+      return ranks;
+   }
 
-	public Integer getNumComments() {
-		return numComments;
-	}
+   public Integer getStandardDeviation() {
+      return standardDeviation;
+   }
 
-	public void setNumComments(Integer numComments) {
-		this.numComments = numComments;
-	}
+   public Integer getTrading() {
+      return trading;
+   }
 
-	public Integer getNumWeights() {
-		return numWeights;
-	}
+   public Integer getUsersRated() {
+      return usersRated;
+   }
 
-	public void setNumWeights(Integer numWeights) {
-		this.numWeights = numWeights;
-	}
+   public Integer getWanting() {
+      return wanting;
+   }
 
-	public Integer getAverageWeight() {
-		return averageWeight;
-	}
+   public Integer getWishing() {
+      return wishing;
+   }
 
-	public void setAverageWeight(Integer averageWeight) {
-		this.averageWeight = averageWeight;
-	}
-	
+   public void setAverage(Integer average) {
+      this.average = average;
+   }
+
+   public void setAverageWeight(Integer averageWeight) {
+      this.averageWeight = averageWeight;
+   }
+
+   public void setBayesianAverage(Integer bayesianAverage) {
+      this.bayesianAverage = bayesianAverage;
+   }
+
+   public void setDate(String date) {
+      this.date = date;
+   }
+
+   public void setMedian(Integer median) {
+      this.median = median;
+   }
+
+   public void setNumComments(Integer numComments) {
+      this.numComments = numComments;
+   }
+
+   public void setNumWeights(Integer numWeights) {
+      this.numWeights = numWeights;
+   }
+
+   public void setOwned(Integer owned) {
+      this.owned = owned;
+   }
+
+   public void setRanks(List<Rank> ranks) {
+      this.ranks = ranks;
+   }
+
+   public void setStandardDeviation(Integer standardDeviation) {
+      this.standardDeviation = standardDeviation;
+   }
+
+   public void setTrading(Integer trading) {
+      this.trading = trading;
+   }
+
+   public void setUsersRated(Integer usersRated) {
+      this.usersRated = usersRated;
+   }
+
+   public void setWanting(Integer wanting) {
+      this.wanting = wanting;
+   }
+
+   public void setWishing(Integer wishing) {
+      this.wishing = wishing;
+   }
+
 }

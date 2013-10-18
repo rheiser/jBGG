@@ -1,3 +1,20 @@
+/**
+   Copyright 2013 Rob Heiser
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
 package org.kerf.bgg.jaxb;
 
 import java.net.MalformedURLException;
@@ -24,7 +41,8 @@ public class Item {
    @XmlAttribute(name = "id")
    String id;
 
-   // FIXME - The BGG schema uses both "type" and "objecttype" in different places.
+   // FIXME - The BGG schema uses both "type" and "objecttype" in different
+   // places.
    @XmlAttribute(name = "type")
    ThingType type;
 
@@ -74,7 +92,7 @@ public class Item {
    @XmlPath("thumbnail/@value")
    String thumbnailAttr;
 
-   @XmlElement(name="link")
+   @XmlElement(name = "link")
    List<Link> links;
 
    @XmlElement(name = "statistics")
@@ -120,249 +138,251 @@ public class Item {
    @XmlElement(name = "listing")
    List<Listing> marketPlaceListings;
 
-   public String getObjectType() {
-      return objectType;
-   }
-
-   public void setObjectType(String objectType) {
-      this.objectType = objectType;
-   }
-
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
-   }
-
-   public ThingType getType() {
-      return type;
-   }
-
-   public void setType(ThingType type) {
-      this.type = type;
-   }
-
-   public String getObjectId() {
-      return objectId;
-   }
-
-   public void setObjectId(String objectId) {
-      this.objectId = objectId;
-   }
-
-   public String getSubType() {
-      return subType;
-   }
-
-   public void setSubType(String subType) {
-      this.subType = subType;
-   }
-
-   public List<String> getSubtypes() {
-      return subtypes;
-   }
-
-   public void setSubtypes(List<String> subtypes) {
-      this.subtypes = subtypes;
-   }
-
    public String getCollectionId() {
       return collectionId;
-   }
-
-   public void setCollectionId(String collectionId) {
-      this.collectionId = collectionId;
-   }
-
-   public List<Name> getNames() {
-      return names;
-   }
-
-   public void setNames(List<Name> name) {
-      this.names = name;
-   }
-
-   public String getDescription() {
-      return description;
-   }
-
-   public void setDescription(String description) {
-      this.description = description;
-   }
-
-   public Year getYearPublished() {
-      return yearPublished;
-   }
-
-   public void setYearPublished(Year yearPublished) {
-      this.yearPublished = yearPublished;
-   }
-
-   public URL getImage() {
-      return image;
-   }
-
-   public void setImage(URL image) {
-      this.image = image;
-   }
-
-   // FIXME - Workaround. The BGG schema is inconsistent with the thumbnail element inside item. Sometimes it's the text() node, sometimes it's the @value attribute
-   public URL getThumbnail() throws MalformedURLException {
-      return (thumbnailProxy == null || thumbnailProxy.equals("")) ? new URL(thumbnailAttr) : new URL(thumbnailProxy);
-   }
-
-   public void setThumbnailProxy(String thumbnail) {
-      this.thumbnailProxy = thumbnail;
-   }
-
-   public void setThumbnailAttr(String thumbnailAttr) {
-      this.thumbnailAttr = thumbnailAttr;
-   }
-
-   public List<Link> getLinks() {
-      return links;
-   }
-
-   public void setLinks(List<Link> link) {
-      this.links = link;
-   }
-
-   public Statistics getStats() {
-      return stats;
-   }
-
-   public void setStats(Statistics stats) {
-      this.stats = stats;
-   }
-
-   public Status getStatus() {
-      return status;
-   }
-
-   public void setStatus(Status status) {
-      this.status = status;
-   }
-
-   public Integer getNumPlays() {
-      return numPlays;
-   }
-
-   public void setNumPlays(Integer numPlays) {
-      this.numPlays = numPlays;
-   }
-
-   public Integer getMinimumPlayers() {
-      return minimumPlayers;
-   }
-
-   public void setMinimumPlayers(Integer minimumPlayers) {
-      this.minimumPlayers = minimumPlayers;
-   }
-
-   public Integer getMaximumPlayers() {
-      return maximumPlayers;
-   }
-
-   public void setMaximumPlayers(Integer maximumPlayers) {
-      this.maximumPlayers = maximumPlayers;
-   }
-
-   public Integer getMinimumAge() {
-      return minimumAge;
-   }
-
-   public void setMinimumAge(Integer minimumAge) {
-      this.minimumAge = minimumAge;
-   }
-
-   public Integer getPlayingTime() {
-      return playingTime;
-   }
-
-   public void setPlayingTime(Integer playingTime) {
-      this.playingTime = playingTime;
-   }
-
-   public List<Poll> getPolls() {
-      return polls;
-   }
-
-   public void setPolls(List<Poll> polls) {
-      this.polls = polls;
-   }
-
-   public List<Item> getVersions() {
-      return versions;
-   }
-
-   public void setVersions(List<Item> versions) {
-      this.versions = versions;
-   }
-
-   public String getProductCode() {
-      return productCode;
-   }
-
-   public void setProductCode(String productCode) {
-      this.productCode = productCode;
-   }
-
-   public Float getLength() {
-      return length;
-   }
-
-   public void setLength(Float length) {
-      this.length = length;
-   }
-
-   public Float getWidth() {
-      return width;
-   }
-
-   public void setWidth(Float width) {
-      this.width = width;
-   }
-
-   public Float getDepth() {
-      return depth;
-   }
-
-   public void setDepth(Float depth) {
-      this.depth = depth;
-   }
-
-   public Float getWeight() {
-      return weight;
-   }
-
-   public void setWeight(Float weight) {
-      this.weight = weight;
    }
 
    public List<Comment> getComments() {
       return comments;
    }
 
-   public void setComments(List<Comment> comments) {
-      this.comments = comments;
+   public Float getDepth() {
+      return depth;
    }
 
-   public List<Video> getVideos() {
-      return videos;
+   public String getDescription() {
+      return description;
    }
 
-   public void setVideos(List<Video> videos) {
-      this.videos = videos;
+   public String getId() {
+      return id;
+   }
+
+   public URL getImage() {
+      return image;
+   }
+
+   public Float getLength() {
+      return length;
+   }
+
+   public List<Link> getLinks() {
+      return links;
    }
 
    public List<Listing> getMarketPlaceListings() {
       return marketPlaceListings;
    }
 
+   public Integer getMaximumPlayers() {
+      return maximumPlayers;
+   }
+
+   public Integer getMinimumAge() {
+      return minimumAge;
+   }
+
+   public Integer getMinimumPlayers() {
+      return minimumPlayers;
+   }
+
+   public List<Name> getNames() {
+      return names;
+   }
+
+   public Integer getNumPlays() {
+      return numPlays;
+   }
+
+   public String getObjectId() {
+      return objectId;
+   }
+
+   public String getObjectType() {
+      return objectType;
+   }
+
+   public Integer getPlayingTime() {
+      return playingTime;
+   }
+
+   public List<Poll> getPolls() {
+      return polls;
+   }
+
+   public String getProductCode() {
+      return productCode;
+   }
+
+   public Statistics getStats() {
+      return stats;
+   }
+
+   public Status getStatus() {
+      return status;
+   }
+
+   public String getSubType() {
+      return subType;
+   }
+
+   public List<String> getSubtypes() {
+      return subtypes;
+   }
+
+   // FIXME - Workaround. The BGG schema is inconsistent with the thumbnail
+   // element inside item. Sometimes it's the text() node, sometimes it's the
+   // @value attribute
+   public URL getThumbnail() throws MalformedURLException {
+      return (thumbnailProxy == null || thumbnailProxy.equals("")) ? new URL(thumbnailAttr) : new URL(thumbnailProxy);
+   }
+
+   public ThingType getType() {
+      return type;
+   }
+
+   public List<Item> getVersions() {
+      return versions;
+   }
+
+   public List<Video> getVideos() {
+      return videos;
+   }
+
+   public Float getWeight() {
+      return weight;
+   }
+
+   public Float getWidth() {
+      return width;
+   }
+
+   public Year getYearPublished() {
+      return yearPublished;
+   }
+
+   public void setCollectionId(String collectionId) {
+      this.collectionId = collectionId;
+   }
+
+   public void setComments(List<Comment> comments) {
+      this.comments = comments;
+   }
+
+   public void setDepth(Float depth) {
+      this.depth = depth;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   public void setImage(URL image) {
+      this.image = image;
+   }
+
+   public void setLength(Float length) {
+      this.length = length;
+   }
+
+   public void setLinks(List<Link> link) {
+      this.links = link;
+   }
+
    public void setMarketPlaceListings(List<Listing> marketPlaceListings) {
       this.marketPlaceListings = marketPlaceListings;
+   }
+
+   public void setMaximumPlayers(Integer maximumPlayers) {
+      this.maximumPlayers = maximumPlayers;
+   }
+
+   public void setMinimumAge(Integer minimumAge) {
+      this.minimumAge = minimumAge;
+   }
+
+   public void setMinimumPlayers(Integer minimumPlayers) {
+      this.minimumPlayers = minimumPlayers;
+   }
+
+   public void setNames(List<Name> name) {
+      this.names = name;
+   }
+
+   public void setNumPlays(Integer numPlays) {
+      this.numPlays = numPlays;
+   }
+
+   public void setObjectId(String objectId) {
+      this.objectId = objectId;
+   }
+
+   public void setObjectType(String objectType) {
+      this.objectType = objectType;
+   }
+
+   public void setPlayingTime(Integer playingTime) {
+      this.playingTime = playingTime;
+   }
+
+   public void setPolls(List<Poll> polls) {
+      this.polls = polls;
+   }
+
+   public void setProductCode(String productCode) {
+      this.productCode = productCode;
+   }
+
+   public void setStats(Statistics stats) {
+      this.stats = stats;
+   }
+
+   public void setStatus(Status status) {
+      this.status = status;
+   }
+
+   public void setSubType(String subType) {
+      this.subType = subType;
+   }
+
+   public void setSubtypes(List<String> subtypes) {
+      this.subtypes = subtypes;
+   }
+
+   public void setThumbnailAttr(String thumbnailAttr) {
+      this.thumbnailAttr = thumbnailAttr;
+   }
+
+   public void setThumbnailProxy(String thumbnail) {
+      this.thumbnailProxy = thumbnail;
+   }
+
+   public void setType(ThingType type) {
+      this.type = type;
+   }
+
+   public void setVersions(List<Item> versions) {
+      this.versions = versions;
+   }
+
+   public void setVideos(List<Video> videos) {
+      this.videos = videos;
+   }
+
+   public void setWeight(Float weight) {
+      this.weight = weight;
+   }
+
+   public void setWidth(Float width) {
+      this.width = width;
+   }
+
+   public void setYearPublished(Year yearPublished) {
+      this.yearPublished = yearPublished;
    }
 
 }
