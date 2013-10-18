@@ -18,6 +18,7 @@
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "items")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Items {
+public class Items implements Iterable<Item>{
    @XmlAttribute
    int total;
 
@@ -60,5 +61,9 @@ public class Items {
 
    public void setTotal(int total) {
       this.total = total;
+   }
+
+   public Iterator<Item> iterator() {
+      return items.iterator();
    }
 }

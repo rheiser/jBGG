@@ -13,11 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -30,7 +31,7 @@ import org.kerf.bgg.type.Type;
 
 @XmlRootElement(name = "forums")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Forums {
+public class Forums implements Iterable<Forum> {
    @XmlAttribute
    Type type;
 
@@ -73,5 +74,9 @@ public class Forums {
 
    public void setType(Type type) {
       this.type = type;
+   }
+
+   public Iterator<Forum> iterator() {
+      return forums.iterator();
    }
 }

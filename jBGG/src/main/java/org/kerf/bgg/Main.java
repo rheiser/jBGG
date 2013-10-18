@@ -159,7 +159,9 @@ public class Main {
       ForumListCommand forumListCommand = new ForumListCommand(xwingBaseGame.getId(), Type.thing);
       Forums forumList = forumListCommand.execute();
 
-      forumList.getForums();
+      for(Forum forum : forumList) {
+         System.out.println(forum.getTitle() + " (" + forum.getNumThreads() + ")");
+       }
 
    }
 
@@ -230,17 +232,17 @@ public class Main {
    }
 
    static public void main(String[] args) throws Exception {
-      doThing();
-       doSearch();
-       doCollection();
-       doFamily();
-       doForumList();
-       doForum();
-       doThread();
-       doUsers();
-       doGuilds();
-       doPlays();
-       doHotItems();
+//      doThing();
+//      doSearch();
+//      doCollection();
+//      doFamily();
+//      doForumList();
+//      doForum();
+//      doThread();
+//      doUsers();
+//      doGuilds();
+//      doPlays();
+//      doHotItems();
       
        doScenario();
    }

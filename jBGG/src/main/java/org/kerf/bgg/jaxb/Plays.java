@@ -18,6 +18,7 @@
 package org.kerf.bgg.jaxb;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "plays")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Plays {
+public class Plays implements Iterable<Play>{
    @XmlAttribute
    String username;
 
@@ -93,5 +94,9 @@ public class Plays {
 
    public void setUsername(String username) {
       this.username = username;
+   }
+
+   public Iterator<Play> iterator() {
+      return plays.iterator();
    }
 }

@@ -17,6 +17,7 @@
 
 package org.kerf.bgg.jaxb;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "boardgames", namespace = "")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Boardgames {
+public class Boardgames implements Iterable<Boardgame>{
    @XmlElement(name = "boardgame")
    List<Boardgame> boardgames;
 
@@ -48,5 +49,9 @@ public class Boardgames {
 
    public void setTermsOfUse(String termsOfUse) {
       this.termsOfUse = termsOfUse;
+   }
+
+   public Iterator<Boardgame> iterator() {
+      return boardgames.iterator();
    }
 }
