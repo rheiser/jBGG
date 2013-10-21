@@ -43,7 +43,7 @@ public class ForumThread {
    String author;
 
    @XmlAttribute(name = "numarticles")
-   String numArticles;
+   Integer numArticles;
 
    @XmlAttribute(name = "postdate")
    @XmlJavaTypeAdapter(DateTimeAdapter.class)
@@ -73,7 +73,7 @@ public class ForumThread {
       return lastPostDate;
    }
 
-   public String getNumArticles() {
+   public Integer getNumArticles() {
       return numArticles;
    }
 
@@ -101,7 +101,7 @@ public class ForumThread {
       this.lastPostDate = lastPostDate;
    }
 
-   public void setNumArticles(String numArticles) {
+   public void setNumArticles(Integer numArticles) {
       this.numArticles = numArticles;
    }
 

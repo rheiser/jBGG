@@ -13,11 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -134,7 +135,7 @@ public class Main {
       Items items = searchCommand.execute();
 
       Integer lowestId = Integer.MAX_VALUE;
-      for (Item currItem : items.getItems()) {
+      for (Item currItem : items) {
          int currentId = Integer.parseInt(currItem.getId());
          if (currentId < lowestId) {
             lowestId = currentId;
@@ -159,10 +160,45 @@ public class Main {
       ForumListCommand forumListCommand = new ForumListCommand(xwingBaseGame.getId(), Type.thing);
       Forums forumList = forumListCommand.execute();
 
-      for(Forum forum : forumList) {
-         System.out.println(forum.getTitle() + " (" + forum.getNumThreads() + ")");
-       }
+      int mostThreads = 0;
+      Forum selectedForum = null;
+      for (Forum forum : forumList) {
+         Integer numThreads = forum.getNumThreads();
+         if (numThreads > mostThreads) {
+            selectedForum = forum;
+            mostThreads = numThreads;
+         }
+         System.out.println(forum.getTitle() + " (" + numThreads + ")");
+      }
 
+      ArrayList<ForumThread> allThreads = new ArrayList<ForumThread>();
+
+      ForumCommand forumCommand = new ForumCommand(selectedForum.getId());
+
+      int i = 1;
+      List<ForumThread> threads = null;
+      
+      do {
+         forumCommand.setPage(i++);
+         selectedForum = forumCommand.execute();
+         threads = selectedForum.getThreads();
+         allThreads.addAll(threads);
+      } while (threads.size() > 0);
+
+      int mostArticles = 0;
+      ForumThread selectedThread = null;
+      for (ForumThread thread : allThreads) {
+         Integer numArticles = thread.getNumArticles();
+         if (numArticles > mostArticles) {
+            selectedThread = thread;
+            mostArticles = numArticles;
+         }
+         System.out.println("\"" + thread.getSubject() + "\" by " + thread.getAuthor() + " (" + numArticles + ")");
+      }
+
+      System.out.println("\"" + selectedThread.getSubject() + "\" by " + selectedThread.getAuthor() + " with "
+            + (selectedThread.getNumArticles() - 1) + " replies is the most popular thread in " + allThreads.size() + " about "
+            + theName.getValue() +": " + "http://boardgamegeek.com/thread/" + selectedThread.getId());
    }
 
    private static void doSearch() throws CommandExecutionException {
@@ -232,19 +268,19 @@ public class Main {
    }
 
    static public void main(String[] args) throws Exception {
-//      doThing();
-//      doSearch();
-//      doCollection();
-//      doFamily();
-//      doForumList();
-//      doForum();
-//      doThread();
-//      doUsers();
-//      doGuilds();
-//      doPlays();
-//      doHotItems();
-      
-       doScenario();
+      // doThing();
+      // doSearch();
+      // doCollection();
+      // doFamily();
+      // doForumList();
+      // doForum();
+      // doThread();
+      // doUsers();
+      // doGuilds();
+      // doPlays();
+      // doHotItems();
+
+      doScenario();
    }
 
 }
