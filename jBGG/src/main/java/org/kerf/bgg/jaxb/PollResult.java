@@ -29,6 +29,14 @@ public class PollResult {
    @XmlAttribute(name = "numvotes")
    Integer numVotes;
 
+   public String toString() {
+      String retval = "POLL RESULT: ";
+      
+      retval += " | Value: " + getValue();
+      retval += " | Num Votes: " + getNumVotes();
+      
+      return retval;
+   }
    public Integer getNumVotes() {
       return numVotes;
    }

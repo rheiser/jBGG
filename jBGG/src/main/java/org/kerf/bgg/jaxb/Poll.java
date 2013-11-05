@@ -13,10 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Poll {
+public class Poll implements Iterable<PollResult> {
    @XmlAttribute
    String name;
 
@@ -38,14 +39,27 @@ public class Poll {
 
    @XmlElementWrapper(name = "results")
    @XmlElement(name = "result")
-   List<PollResult> result;
+   List<PollResult> results;
+
+   public String toString() {
+      String retval = "POLL: ";
+
+      retval += " | Name: " + getName();
+      retval += " | Title: " + getTitle();
+      retval += " | Total Votes: " + getTotalVotes();
+
+      for (PollResult result : results) {
+         retval += result;
+      }
+      return retval;
+   }
 
    public String getName() {
       return name;
    }
 
-   public List<PollResult> getResult() {
-      return result;
+   public List<PollResult> getResults() {
+      return results;
    }
 
    public String getTitle() {
@@ -60,8 +74,8 @@ public class Poll {
       this.name = name;
    }
 
-   public void setResult(List<PollResult> result) {
-      this.result = result;
+   public void setResults(List<PollResult> result) {
+      this.results = result;
    }
 
    public void setTitle(String title) {
@@ -70,5 +84,9 @@ public class Poll {
 
    public void setTotalVotes(Integer totalVotes) {
       this.totalVotes = totalVotes;
+   }
+
+   public Iterator<PollResult> iterator() {
+      return results.iterator();
    }
 }

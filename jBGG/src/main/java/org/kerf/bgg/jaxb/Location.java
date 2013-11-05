@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -42,6 +42,20 @@ public class Location {
 
    @XmlElement
    String country;
+
+   public String toString() {
+      String retval = "LOCATION: ";
+
+      retval += " | Address 1: " + getAddressFirstLine();
+      retval += " | Address 2: " + getAddressSecondLine();
+      retval += " | City: " + getCity();
+      retval += " | State: " + getStateOrProvince();
+      retval += " | ZIP: " + getPostalCode();
+      retval += " | Country: " + getCountry();
+
+      return retval;
+
+   }
 
    public String getAddressFirstLine() {
       return addressFirstLine;

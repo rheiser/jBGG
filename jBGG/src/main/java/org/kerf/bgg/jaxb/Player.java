@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -51,6 +51,22 @@ public class Player {
 
    @XmlAttribute(name = "win")
    Boolean won;
+
+   public String toString() {
+      String retval = "PLAYER: ";
+
+      retval += " | Username: " + getUsername();
+      retval += " | User ID: " + getUserId();
+      retval += " | Name: " + getName();
+      retval += " | Start Position: " + getStartPosition();
+      retval += " | Color: " + getColor();
+      retval += " | Score: " + getScore();
+      retval += " | New player: " + getWasNew();
+      retval += " | Rating: " + getRating();
+      retval += " | Winner: " + getWon();
+
+      return retval;
+   }
 
    public String getColor() {
       return color;

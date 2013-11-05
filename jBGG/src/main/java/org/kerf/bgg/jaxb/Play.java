@@ -13,11 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +34,7 @@ import org.kerf.bgg.jaxb.adapter.DateAdapter;
 
 @XmlRootElement(name = "play")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Play {
+public class Play implements Iterable<Player>{
    @XmlAttribute
    String id;
 
@@ -64,6 +66,30 @@ public class Play {
    @XmlElementWrapper(name = "players")
    @XmlElement(name = "player")
    List<Player> players;
+
+   public Play() {
+      players = new ArrayList<Player>();
+   }
+
+   public String toString() {
+      String retval = "PLAY: ";
+
+      retval += " | ID: " + getId();
+      retval += " | Date: " + getDate();
+      retval += " | Quantity: " + getQuantity();
+      retval += " | Length: " + getLength();
+      retval += " | Incomplete: " + getIncomplete();
+      retval += " | Win stats: " + (!getNoWinStats());
+      retval += " | Location: " + getLocation();
+      retval += " | Item: " + getItem();
+      retval += " | Comment: " + getComments();
+
+      for (Player player : getPlayers()) {
+         retval += " | Player: " + player;
+      }
+
+      return retval;
+   }
 
    public String getComments() {
       return comments;
@@ -143,5 +169,9 @@ public class Play {
 
    public void setQuantity(Integer quantity) {
       this.quantity = quantity;
+   }
+
+   public Iterator<Player> iterator() {
+      return players.iterator();
    }
 }

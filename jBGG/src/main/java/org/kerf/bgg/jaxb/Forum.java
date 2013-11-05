@@ -13,11 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,10 +34,8 @@ import org.kerf.bgg.jaxb.adapter.DateTimeAdapter;
 
 @XmlRootElement(name = "forum")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Forum {
-   // <forum id="559" groupid="0" title="Sessions" noposting="0"
-   // description="Post your session reports here." numthreads="593"
-   // numposts="4570" lastpostdate="Wed, 02 Oct 2013 20:25:35 +0000" />
+public class Forum implements Iterable<ForumThread>{
+
    @XmlAttribute
    String id;
 
@@ -64,6 +64,28 @@ public class Forum {
    @XmlElementWrapper(name = "threads")
    @XmlElement(name = "thread")
    List<ForumThread> threads;
+
+   public Forum() {
+      threads = new ArrayList<ForumThread>();
+   }
+   
+   public String toString() {
+      String retval = "FORUM: ";
+
+      retval += " | ID: " + getId();
+      retval += " | Group ID: " + getGroupId();
+      retval += " | Title: " + getTitle();
+      retval += " | Posting: " + (!getNoPosting());
+      retval += " | Description: " + getDescription();
+      retval += " | # Threads: " + getNumThreads();
+      retval += " | # Posts: " + getNumPosts();
+      retval += " | Last post date: " + getLastPostDate();
+
+      for (ForumThread thread : getThreads()) {
+         retval += thread;
+      }
+      return retval;
+   }
 
    public String getDescription() {
       return description;
@@ -135,6 +157,10 @@ public class Forum {
 
    public void setTitle(String title) {
       this.title = title;
+   }
+
+   public Iterator<ForumThread> iterator() {
+      return threads.iterator();
    }
 
 }

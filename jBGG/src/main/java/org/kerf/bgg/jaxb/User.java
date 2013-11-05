@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {
@@ -39,85 +41,108 @@ public class User {
    URL termsOfUse;
 
    @XmlPath("firstname/@value")
-   String firstname;
+   String firstName;
 
    @XmlPath("lastname/@value")
-   String lastname;
+   String lastName;
 
    @XmlPath("avatarlink/@value")
-   URL avatarlink;
+   URL avatarLink;
 
    @XmlPath("yearregistered/@value")
-   String yearregistered;
+   String yearRegistered;
 
    @XmlPath("lastlogin/@value")
-   String lastlogin;
+   String lastLogin;
 
    @XmlPath("stateorprovince/@value")
-   String stateorprovince;
+   String stateOrProvince;
 
    @XmlPath("country/@value")
    String country;
 
    @XmlPath("webaddress/@value")
-   String webaddress;
+   String webAddress;
 
    @XmlPath("xboxaccount/@value")
-   String xboxaccount;
+   String xboxAccount;
 
    @XmlPath("wiiaccount/@value")
-   String wiiaccount;
+   String wiiAccount;
 
    @XmlPath("psnaccount/@value")
-   String psnaccount;
+   String psnAccount;
 
    @XmlPath("battlenetaccount/@value")
-   String battlenetaccount;
+   String battlenetAccount;
 
    @XmlPath("steamaccount/@value")
    String steamaccount;
 
    @XmlPath("traderating/@value")
-   String traderating;
+   String tradeRating;
 
-   public URL getAvatarlink() {
-      return avatarlink;
+   public String toString() {
+      String retval = "USER: ";
+      
+      retval += " | ID: " + getId();
+      retval += " | Name: " + getName();
+      retval += " | termsOfUse: " + getTermsOfUse();
+      retval += " | First name: " + getFirstName();
+      retval += " | Last name: " + getLastName();
+      retval += " | Avatar URL: " + getAvatarLink();
+      retval += " | Registered: " + getYearRegistered();
+      retval += " | Last login: " + getLastLogin();
+      retval += " | State: "+ getStateOrProvince();
+      retval += " | Country: " + getCountry();
+      retval += " | Website: " + getWebAddress();
+      retval += " | XBox: " + getXboxAccount();
+      retval += " | Wii: " + getWiiAccount();
+      retval += " | PSN: " + getPsnAccount();
+      retval += " | BattleNET: " + getBattlenetAccount();
+      retval += " | Steam: " + getSteamaccount();
+      retval += " | Trade rating: "+ getTradeRating();
+      
+      return retval;
+   }
+   public URL getAvatarLink() {
+      return avatarLink;
    }
 
-   public String getBattlenetaccount() {
-      return battlenetaccount;
+   public String getBattlenetAccount() {
+      return battlenetAccount;
    }
 
    public String getCountry() {
       return country;
    }
 
-   public String getFirstname() {
-      return firstname;
+   public String getFirstName() {
+      return firstName;
    }
 
    public String getId() {
       return id;
    }
 
-   public String getLastlogin() {
-      return lastlogin;
+   public String getLastLogin() {
+      return lastLogin;
    }
 
-   public String getLastname() {
-      return lastname;
+   public String getLastName() {
+      return lastName;
    }
 
    public String getName() {
       return name;
    }
 
-   public String getPsnaccount() {
-      return psnaccount;
+   public String getPsnAccount() {
+      return psnAccount;
    }
 
-   public String getStateorprovince() {
-      return stateorprovince;
+   public String getStateOrProvince() {
+      return stateOrProvince;
    }
 
    public String getSteamaccount() {
@@ -128,64 +153,64 @@ public class User {
       return termsOfUse;
    }
 
-   public String getTraderating() {
-      return traderating;
+   public String getTradeRating() {
+      return tradeRating;
    }
 
-   public String getWebaddress() {
-      return webaddress;
+   public String getWebAddress() {
+      return webAddress;
    }
 
-   public String getWiiaccount() {
-      return wiiaccount;
+   public String getWiiAccount() {
+      return wiiAccount;
    }
 
-   public String getXboxaccount() {
-      return xboxaccount;
+   public String getXboxAccount() {
+      return xboxAccount;
    }
 
-   public String getYearregistered() {
-      return yearregistered;
+   public String getYearRegistered() {
+      return yearRegistered;
    }
 
-   public void setAvatarlink(URL avatarlink) {
-      this.avatarlink = avatarlink;
+   public void setAvatarLink(URL avatarlink) {
+      this.avatarLink = avatarlink;
    }
 
-   public void setBattlenetaccount(String battlenetaccount) {
-      this.battlenetaccount = battlenetaccount;
+   public void setBattlenetAccount(String battlenetaccount) {
+      this.battlenetAccount = battlenetaccount;
    }
 
    public void setCountry(String country) {
       this.country = country;
    }
 
-   public void setFirstname(String firstname) {
-      this.firstname = firstname;
+   public void setFirstName(String firstname) {
+      this.firstName = firstname;
    }
 
    public void setId(String id) {
       this.id = id;
    }
 
-   public void setLastlogin(String lastlogin) {
-      this.lastlogin = lastlogin;
+   public void setLastLogin(String lastlogin) {
+      this.lastLogin = lastlogin;
    }
 
-   public void setLastname(String lastname) {
-      this.lastname = lastname;
+   public void setLastName(String lastname) {
+      this.lastName = lastname;
    }
 
    public void setName(String name) {
       this.name = name;
    }
 
-   public void setPsnaccount(String psnaccount) {
-      this.psnaccount = psnaccount;
+   public void setPsnAccount(String psnaccount) {
+      this.psnAccount = psnaccount;
    }
 
-   public void setStateorprovince(String stateorprovince) {
-      this.stateorprovince = stateorprovince;
+   public void setStateOrProvince(String stateorprovince) {
+      this.stateOrProvince = stateorprovince;
    }
 
    public void setSteamaccount(String steamaccount) {
@@ -196,24 +221,24 @@ public class User {
       this.termsOfUse = termsOfUse;
    }
 
-   public void setTraderating(String traderating) {
-      this.traderating = traderating;
+   public void setTradeRating(String traderating) {
+      this.tradeRating = traderating;
    }
 
-   public void setWebaddress(String webaddress) {
-      this.webaddress = webaddress;
+   public void setWebAddress(String webaddress) {
+      this.webAddress = webaddress;
    }
 
-   public void setWiiaccount(String wiiaccount) {
-      this.wiiaccount = wiiaccount;
+   public void setWiiAccount(String wiiaccount) {
+      this.wiiAccount = wiiaccount;
    }
 
-   public void setXboxaccount(String xboxaccount) {
-      this.xboxaccount = xboxaccount;
+   public void setXboxAccount(String xboxaccount) {
+      this.xboxAccount = xboxaccount;
    }
 
-   public void setYearregistered(String yearregistered) {
-      this.yearregistered = yearregistered;
+   public void setYearRegistered(String yearregistered) {
+      this.yearRegistered = yearregistered;
    }
 
 }

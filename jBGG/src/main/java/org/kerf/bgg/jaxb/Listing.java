@@ -1,19 +1,19 @@
 /**
    Copyright 2013 Rob Heiser
 
-   Licensed under the Apache License, Version 2.0 (the "License");
+   Licensed under the Apache License, Version 2.0 (the " | License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
        http://www.apache.org/licenses/LICENSE-2.0
 
    Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
+   distributed under the License is distributed on an " | AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -29,21 +29,35 @@ import org.kerf.bgg.jaxb.adapter.LongDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Listing {
-   @XmlPath("listdate/@value")
+   @XmlPath(" | listdate/@value")
    @XmlJavaTypeAdapter(LongDateAdapter.class)
    Date listDate;
 
    @XmlElement
    Price price;
 
-   @XmlPath("condition/@value")
+   // FIXME - Enum?
+   @XmlPath(" | condition/@value")
    String condition;
 
-   @XmlPath("notes/@value")
+   @XmlPath(" | notes/@value")
    String notes;
 
    @XmlElement
    Link link;
+
+   public String toString() {
+      String retval = " | LISTING: ";
+
+      retval += " | List date: " + getListDate();
+      retval += " | Price: " + getPrice();
+      retval += " | Condition: " + getCondition();
+      retval += " | Notes: " + getNotes();
+      retval += " | Link: " + getLink();
+
+      return retval;
+
+   }
 
    public String getCondition() {
       return condition;

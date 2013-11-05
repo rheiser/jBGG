@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -38,105 +38,175 @@ public class Item {
    private Logger logger = Logger.getLogger(Item.class);
 
    // FIXME - The BGG schema uses both "id" and "objectid" in different places.
-   @XmlAttribute(name = "id")
+   @XmlAttribute(name = "id") // ThingCommand, FamilyCommand, HotCommand, SearchCommand
    String id;
 
    // FIXME - The BGG schema uses both "type" and "objecttype" in different
    // places.
-   @XmlAttribute(name = "type")
+   @XmlAttribute(name = "type")  // ThingCommand, SearchCommand
    ThingType type;
 
-   @XmlAttribute(name = "objecttype")
+   @XmlAttribute(name = "objecttype") // CollectionCommand
    String objectType;
 
-   @XmlAttribute(name = "objectid")
+   @XmlAttribute(name = "objectid") // CollectionCommand
    String objectId;
 
-   @XmlAttribute(name = "subtype")
+   @XmlAttribute(name = "subtype") // CollectionCommand
    String subType;
 
-   @XmlElementWrapper(name = "subtypes")
+   @XmlElementWrapper(name = "subtypes") // PlayCommand
    @XmlElement(name = "subtype")
-   List<String> subtypes;
+   List<Subtype> subtypes;
 
-   @XmlAttribute(name = "collid")
+   @XmlAttribute(name = "collid") // CollectionCommand
    String collectionId;
 
-   @XmlElement(name = "name")
+   @XmlElement(name = "name") // ThingCommand, CollectionCommand, FamilyCommand, HotCommand, SearchCommand
    List<Name> names;
 
-   @XmlElement
+   @XmlElement // ThingCommand, FamilyCommand
    String description;
 
-   @XmlElement(name = "yearpublished")
+   @XmlElement(name = "yearpublished") // ThingCommand (value attribute), CollectionCommand (text node), HotCommand (value attribute), SearchCommand (value attribute)
    Year yearPublished;
 
-   @XmlPath("minplayers/@value")
-   Integer minimumPlayers;
+   @XmlElementWrapper(name = "marketplacelistings") // ThingCommand
+   @XmlElement(name = "listing")
+   List<Listing> marketPlaceListings;
 
-   @XmlPath("maxplayers/@value")
-   Integer maximumPlayers;
-
-   @XmlPath("minage/@value")
-   Integer minimumAge;
-
-   @XmlPath("playingtime/@value")
+   @XmlPath("playingtime/@value")  // ThingCommand
    Integer playingTime;
 
-   @XmlElement
+   @XmlElement // ThingCommand, CollectionCommand, FamilyCommand
    URL image;
 
-   @XmlPath("thumbnail/text()")
+   @XmlPath("thumbnail/text()")  // ThingCommand, CollectionCommand, FamilyCommand
    String thumbnailProxy;
 
-   @XmlPath("thumbnail/@value")
+   @XmlPath("thumbnail/@value") // HotCommand
    String thumbnailAttr;
 
-   @XmlElement(name = "link")
+   @XmlElement(name = "link") // ThingCommand, FamilyCommand
    List<Link> links;
 
-   @XmlElement(name = "statistics")
+   @XmlElement(name = "statistics")  // ThingCommand
    Statistics stats;
 
    @XmlElement
-   Status status;
+   Status status; // CollectionCommand
 
-   @XmlElement(name = "numplays")
+   @XmlElement(name = "numplays") // CollectionCommand
    Integer numPlays;
 
-   @XmlElement(name = "poll")
+   @XmlElement(name = "poll") // ThingCommand
    List<Poll> polls;
 
-   @XmlElementWrapper(name = "versions")
+   @XmlElementWrapper(name = "versions") // ThingCommand
    @XmlElement(name = "item")
    List<Item> versions;
 
-   @XmlPath("productcode/@value")
-   String productCode;
-
-   @XmlPath("length/@value")
-   Float length;
-
-   @XmlPath("width/@value")
-   Float width;
-
-   @XmlPath("depth/@value")
-   Float depth;
-
-   @XmlPath("weight/@value")
-   Float weight;
-
-   @XmlElementWrapper(name = "comments")
+   @XmlElementWrapper(name = "comments") // ThingCommand
    @XmlElement(name = "comment")
    List<Comment> comments;
 
-   @XmlElementWrapper(name = "videos")
+   @XmlElementWrapper(name = "videos") // ThingCommand
    @XmlElement(name = "video")
    List<Video> videos;
 
-   @XmlElementWrapper(name = "marketplacelistings")
-   @XmlElement(name = "listing")
-   List<Listing> marketPlaceListings;
+   @XmlPath("productcode/@value") // ThingCommand (only when versions = 1)
+   String productCode;
+
+   @XmlPath("length/@value") // ThingCommand (only when versions = 1)
+   Float length;
+
+   @XmlPath("width/@value") // ThingCommand (only when versions = 1)
+   Float width;
+
+   @XmlPath("depth/@value") // ThingCommand (only when versions = 1)
+   Float depth;
+
+   @XmlPath("weight/@value") // ThingCommand (only when versions = 1)
+   Float weight;
+
+   @XmlPath("minplayers/@value") // ThingCommand (only when marketplace = 1)
+   Integer minimumPlayers;
+
+   @XmlPath("maxplayers/@value") // ThingCommand (only when marketplace = 1)
+   Integer maximumPlayers;
+
+   @XmlPath("minage/@value") // ThingCommand (only when marketplace = 1)
+   Integer minimumAge;
+
+   public String toString() {
+      String retval = "ITEM: ";
+
+      retval += "CollectionId: " + getCollectionId();
+
+      retval += " | Comments: " + getComments();
+
+      retval += " | Depth: " + getDepth();
+
+      retval += " | Description: " + getDescription();
+
+      retval += " | Id: " + getId();
+
+      retval += " | Image: " + getImage();
+
+      retval += " | Length: " + getLength();
+
+      retval += " | Links: " + getLinks();
+
+      retval += " | MarketPlaceListings: " + getMarketPlaceListings();
+
+      retval += " | MaximumPlayers: " + getMaximumPlayers();
+
+      retval += " | MinimumAge: " + getMinimumAge();
+
+      retval += " | MinimumPlayers: " + getMinimumPlayers();
+
+      retval += " | Names: " + getNames();
+
+      retval += " | NumPlays: " + getNumPlays();
+
+      retval += " | ObjectId: " + getObjectId();
+
+      retval += " | ObjectType: " + getObjectType();
+
+      retval += " | PlayingTime: " + getPlayingTime();
+
+      retval += " | Polls: " + getPolls();
+
+      retval += " | ProductCode: " + getProductCode();
+
+      retval += " | Stats: " + getStats();
+
+      retval += " | Status: " + getStatus();
+
+      retval += " | SubType: " + getSubType();
+
+      retval += " | Subtypes: " + getSubtypes();
+
+      try {
+         retval += " | Thumbnail: " + getThumbnail();
+      } catch (MalformedURLException e) {
+         // ignore
+      }
+
+      retval += " | Type: " + getType();
+
+      retval += " | Versions: " + getVersions();
+
+      retval += " | Videos: " + getVideos();
+
+      retval += " | Weight: " + getWeight();
+
+      retval += " | Width: " + getWidth();
+
+      retval += " | YearPublished: " + getYearPublished();
+
+      return retval;
+   }
 
    public String getCollectionId() {
       return collectionId;
@@ -226,7 +296,7 @@ public class Item {
       return subType;
    }
 
-   public List<String> getSubtypes() {
+   public List<Subtype> getSubtypes() {
       return subtypes;
    }
 
@@ -234,7 +304,7 @@ public class Item {
    // element inside item. Sometimes it's the text() node, sometimes it's the
    // @value attribute
    public URL getThumbnail() throws MalformedURLException {
-      return (thumbnailProxy == null || thumbnailProxy.equals("")) ? new URL(thumbnailAttr) : new URL(thumbnailProxy);
+      return (thumbnailProxy == null || thumbnailProxy.equals("")) ? new URL(thumbnailAttr + "?attr") : new URL(thumbnailProxy + "?proxy");
    }
 
    public ThingType getType() {
@@ -349,7 +419,7 @@ public class Item {
       this.subType = subType;
    }
 
-   public void setSubtypes(List<String> subtypes) {
+   public void setSubtypes(List<Subtype> subtypes) {
       this.subtypes = subtypes;
    }
 

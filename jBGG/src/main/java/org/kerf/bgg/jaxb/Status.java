@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -58,6 +58,22 @@ public class Status {
    @XmlAttribute(name = "lastmodified")
    @XmlJavaTypeAdapter(DateTimeAdapter.class)
    Date lastModified;
+
+   public String toString() {
+      String retval = "STATUS: ";
+
+      retval += " | Own: " + getOwn();
+      retval += " | Previously Owned: " + getPreviouslyOwned();
+      retval += " | Tradeable: " + getTradeable();
+      retval += " | Want: " + getWant();
+      retval += " | Want to Play: " + getWantToPlay();
+      retval += " | Want to Buy: " + getWantToBuy();
+      retval += " | Wishlist: " + getWishlist();
+      retval += " | Pre-ordered: " + getPreordered();
+      retval += " | Last Modified: " + getLastModified();
+
+      return retval;
+   }
 
    public Date getLastModified() {
       return lastModified;

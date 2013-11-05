@@ -37,6 +37,16 @@ public class Link {
    @XmlAttribute
    Boolean inbound;
 
+   public String toString() {
+      String retval = "LINK: ";
+      
+      retval += " | ID: " + getId();
+      retval += " | Type: " + getType();
+      retval += " | Value: " + getValue();
+      retval += " | Inbound: " + getInbound();
+      
+      return retval;
+   }
    public String getId() {
       return id;
    }

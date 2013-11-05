@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -35,6 +35,17 @@ public class Comment {
 
    @XmlAttribute
    String value;
+
+   public String toString() {
+      String retval = "COMMENT: ";
+
+      retval += " | Username: " + getUsername();
+      retval += " | Rating: " + getRating();
+      retval += " | Value: " + getValue();
+
+      return retval;
+
+   }
 
    public Float getRating() {
       return rating;

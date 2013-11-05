@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -35,9 +35,11 @@ public class Video {
    @XmlAttribute
    String title;
 
+   // FIXME - Enum?
    @XmlAttribute
    String category;
 
+   // FIXME - standard Enum? (e.g., "en_US")
    @XmlAttribute
    String language;
 
@@ -53,6 +55,21 @@ public class Video {
    @XmlAttribute(name = "postdate")
    @XmlJavaTypeAdapter(ArticleDateAdapter.class)
    Date postDate;
+
+   public String toString() {
+      String retval = "VIDEO: ";
+
+      retval += " | ID: " + getId();
+      retval += " | Title: " + getTitle();
+      retval += " | Category: " + getCategory();
+      retval += " | Language: " + getLanguage();
+      retval += " | Link: " + getLink();
+      retval += " | Username: " + getUsername();
+      retval += " | User ID: " + getUserId();
+      retval += " | Post date: " + getPostDate();
+
+      return retval;
+   }
 
    public String getCategory() {
       return category;

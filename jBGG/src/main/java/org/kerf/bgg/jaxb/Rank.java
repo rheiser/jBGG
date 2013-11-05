@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -40,6 +40,19 @@ public class Rank {
 
    @XmlAttribute(name = "bayesaverage")
    String bayesianAverage;
+
+   public String toString() {
+      String retval = "RANK: ";
+
+      retval += " | Type: " + getType();
+      retval += " | ID: " + getId();
+      retval += " | Name: " + getName();
+      retval += " | Friendly Name: " + getFriendlyName();
+      retval += " | Value: " + getValue();
+      retval += " | Bayesian Avg.: " + getBayesianAverage();
+
+      return retval;
+   }
 
    public String getBayesianAverage() {
       return bayesianAverage;

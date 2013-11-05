@@ -61,6 +61,21 @@ public class Guild {
    @XmlElement
    Location location;
 
+   public String toString() {
+      String retval = "GUILD: ";
+      
+      retval += " | ID: " + getId();
+      retval += " | Name: " + getName();
+      retval += " | Created: " + getCreated();
+      retval += " | Terms of Use: " + getTermsOfUse();
+      retval += " | Category: " + getCategory();
+      retval += " | Website: " + getWebsite();
+      retval += " | Manager: " + getManager();
+      retval += " | Description: " + getDescription();
+      retval += " | Location: " + getLocation();
+      
+      return retval;
+   }
    public GuildCategory getCategory() {
       return category;
    }

@@ -19,7 +19,6 @@ package org.kerf.bgg;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.kerf.bgg.command.CollectionCommand;
@@ -41,12 +40,9 @@ import org.kerf.bgg.jaxb.Forums;
 import org.kerf.bgg.jaxb.Guild;
 import org.kerf.bgg.jaxb.Item;
 import org.kerf.bgg.jaxb.Items;
-import org.kerf.bgg.jaxb.Link;
 import org.kerf.bgg.jaxb.Name;
+import org.kerf.bgg.jaxb.Play;
 import org.kerf.bgg.jaxb.Plays;
-import org.kerf.bgg.jaxb.Rank;
-import org.kerf.bgg.jaxb.Rating;
-import org.kerf.bgg.jaxb.Statistics;
 import org.kerf.bgg.jaxb.User;
 import org.kerf.bgg.type.NameType;
 import org.kerf.bgg.type.ThingType;
@@ -58,75 +54,143 @@ public class Main {
       CollectionCommand collectionCommand = new CollectionCommand("rheiser");
       // collectionCommand.setOwn(true);
       // collectionCommand.setMinplays(5);
-      collectionCommand.setRated(true);
+      // collectionCommand.setRated(true);
+
+      System.out.println("=== CollectionCommand ===");
+
       Items collection = collectionCommand.execute();
+
       for (Item item : collection.getItems()) {
-         for (Name name : item.getNames()) {
-            System.out.println(name.getValue() + " (image: " + item.getImage() + ")");
-         }
+         System.out.println(item);
       }
    }
 
    private static void doFamily() throws CommandExecutionException {
       FamilyCommand familyCommand = new FamilyCommand("17106");// Android 
 
+      System.out.println("=== FamilyCommand ===");
+
       Items families = familyCommand.execute();
 
       for (Item currItem : families.getItems()) {
-         for (Name name : currItem.getNames()) {
-            System.out.println("Name: " + name.getValue());
-         }
-
-         for (Link link : currItem.getLinks()) {
-            System.out.println("Link: " + link.getValue() + " | " + link.getType());
-         }
+         System.out.println(currItem);
       }
    }
 
    private static void doForum() throws CommandExecutionException {
       ForumCommand forumCommand = new ForumCommand("285");
 
+      System.out.println("=== ForumCommand ===");
+
       Forum forum = forumCommand.execute();
 
       for (ForumThread thread : forum.getThreads()) {
-         System.out.println(thread.getSubject() + ": " + thread.getAuthor() + " | " + thread.getNumArticles());
+         System.out.println(thread);
       }
    }
 
    private static void doForumList() throws CommandExecutionException {
       ForumListCommand forumListCommand = new ForumListCommand("31260", Type.thing); // Agricola
-      // forumListCommand.setType("thing");
+
+      System.out.println("=== ForumListCommand ===");
 
       Forums forumList = forumListCommand.execute();
-      System.out.println(forumList.getType());
-      for (Forum item : forumList.getForums()) {
-         System.out.println(item.getTitle() + " - " + item.getDescription() + " (" + item.getNumThreads() + ")");
+
+      for (Forum forum : forumList.getForums()) {
+         System.out.println(forum);
       }
    }
 
    private static void doGuilds() throws CommandExecutionException {
       GuildsCommand guildsCommand = new GuildsCommand("1145");
 
+      System.out.println("=== GuildsCommand ===");
+
       Guild guild = guildsCommand.execute();
 
-      System.out.println(guild.getName() + " (" + guild.getManager() + ") | " + guild.getDescription());
+      System.out.println(guild);
    }
 
    private static void doHotItems() throws CommandExecutionException, MalformedURLException {
       HotCommand hotCommand = new HotCommand();
+
+      System.out.println("=== HotCommand ===");
+
       Items items = hotCommand.execute();
 
-      for (Item currItem : items.getItems()) {
-         System.out.println(currItem.getNames().get(0).getValue() + " " + currItem.getThumbnail());
+      for (Item item : items.getItems()) {
+         System.out.println(item);
       }
    }
 
    private static void doPlays() throws CommandExecutionException {
       PlaysCommand playsCommand = new PlaysCommand("rheiser");
 
+      System.out.println("=== PlaysCommand ===");
+
       Plays plays = playsCommand.execute();
 
-      System.out.println(plays.getUsername() + " has " + plays.getTotal() + " plays");
+      for (Play play : plays) {
+         System.out.println(play);
+      }
+   }
+
+   private static void doSearch() throws CommandExecutionException {
+      SearchCommand searchCommand = new SearchCommand("Agricola");
+      // searchCommand.setExact(Boolean.FALSE);
+
+      System.out.println("=== SearchCommand ===");
+
+      Items boardgames = searchCommand.execute();
+
+      for (Item item : boardgames.getItems()) {
+         System.out.println(item);
+      }
+   }
+
+   private static void doThing() throws CommandExecutionException, MalformedURLException {
+      ThingCommand thingCommand = new ThingCommand("31260");
+      thingCommand.setComments(true);
+      thingCommand.setHistorical(true);
+      thingCommand.setMarketplace(true);
+      thingCommand.setRatingComments(true);
+      thingCommand.setStats(true);
+      thingCommand.setVersions(true);
+      thingCommand.setVideos(true);
+
+      System.out.println("=== ThingCommand ===");
+
+      Items items = thingCommand.execute();
+
+      for (Item item : items.getItems()) {
+         System.out.println(item);
+      }
+   }
+
+   private static void doThread() throws CommandExecutionException {
+      ThreadCommand threadCommand = new ThreadCommand("323972");
+
+      System.out.println("=== ThreadCommand ===");
+
+      ForumThread thread = threadCommand.execute();
+
+      for (Article article : thread.getArticles()) {
+         System.out.println(article);
+      }
+   }
+
+   private static void doUsers() throws CommandExecutionException {
+      UsersCommand usersCommand = new UsersCommand("rheiser");
+      usersCommand.setBuddies(true);
+      usersCommand.setGuilds(true);
+      usersCommand.setHot(true);
+      usersCommand.setTop(true);
+
+      System.out.println("=== UsersCommand ===");
+
+      User user = usersCommand.execute();
+
+      System.out.println(user);
    }
 
    private static void doScenario() throws CommandExecutionException {
@@ -177,7 +241,7 @@ public class Main {
 
       int i = 1;
       List<ForumThread> threads = null;
-      
+
       do {
          forumCommand.setPage(i++);
          selectedForum = forumCommand.execute();
@@ -198,89 +262,23 @@ public class Main {
 
       System.out.println("\"" + selectedThread.getSubject() + "\" by " + selectedThread.getAuthor() + " with "
             + (selectedThread.getNumArticles() - 1) + " replies is the most popular thread in " + allThreads.size() + " about "
-            + theName.getValue() +": " + "http://boardgamegeek.com/thread/" + selectedThread.getId());
-   }
-
-   private static void doSearch() throws CommandExecutionException {
-      SearchCommand searchCommand = new SearchCommand("Agricola");
-      // searchCommand.setExact(Boolean.FALSE);
-
-      Items boardgames = searchCommand.execute();
-
-      for (Item item : boardgames.getItems()) {
-         for (Name currName : item.getNames()) {
-            System.out.println("Name: " + currName.getValue());
-         }
-         System.out.println("Year: "
-               + (item.getYearPublished() != null ? (item.getYearPublished().getText().equals("") ? item.getYearPublished()
-                     .getValue() : item.getYearPublished().getText()) : "not specified"));
-         System.out.println("ID: " + item.getId());
-      }
-   }
-
-   private static void doThing() throws CommandExecutionException, MalformedURLException {
-      ThingCommand thingCommand = new ThingCommand("31260");
-      thingCommand.setComments(true);
-      thingCommand.setHistorical(true);
-      thingCommand.setMarketplace(true);
-      thingCommand.setRatingComments(true);
-      thingCommand.setStats(true);
-      thingCommand.setVersions(true);
-      thingCommand.setVideos(true);
-
-      Items items = thingCommand.execute();
-      for (Item item : items.getItems()) {
-         HashSet<String> set = new HashSet<String>();
-
-         Statistics stats = item.getStats();
-         for (Rating rating : stats.getRatings()) {
-            for (Rank rank : rating.getRanks()) {
-               set.add(rank.getType());
-            }
-         }
-         for (String linktype : set) {
-            System.out.println(linktype);
-         }
-
-      }
-   }
-
-   private static void doThread() throws CommandExecutionException {
-      ThreadCommand threadCommand = new ThreadCommand("323972");
-
-      ForumThread thread = threadCommand.execute();
-      for (Article article : thread.getArticles()) {
-         System.out.println(article.getSubject() + " | " + article.getUsername() + " | " + article.getPostDate()
-               + (article.getPostDate().equals(article.getEditDate()) ? "" : " (" + article.getEditDate() + ")"));
-      }
-   }
-
-   private static void doUsers() throws CommandExecutionException {
-      UsersCommand usersCommand = new UsersCommand("rheiser");
-      // usersCommand.setBuddies(false);
-      // usersCommand.setGuilds(true);
-      // usersCommand.setHot(true);
-      // usersCommand.setTop(true);
-
-      User user = usersCommand.execute();
-
-      System.out.println("User: " + user.getFirstname() + " " + user.getLastname() + " | " + user.getCountry());
+            + theName.getValue() + ": " + "http://boardgamegeek.com/thread/" + selectedThread.getId());
    }
 
    static public void main(String[] args) throws Exception {
-      // doThing();
-      // doSearch();
-      // doCollection();
-      // doFamily();
-      // doForumList();
-      // doForum();
-      // doThread();
-      // doUsers();
-      // doGuilds();
-      // doPlays();
-      // doHotItems();
+      doThing();
+      doSearch();
+      doCollection();
+      doFamily();
+      doForumList();
+      doForum();
+      doThread();
+      doUsers();
+      doGuilds();
+      doPlays();
+      doHotItems();
 
-      doScenario();
+      // doScenario();
    }
 
 }

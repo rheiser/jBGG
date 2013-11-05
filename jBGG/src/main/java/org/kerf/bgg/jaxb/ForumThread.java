@@ -13,11 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +34,7 @@ import org.kerf.bgg.jaxb.adapter.DateTimeAdapter;
 
 @XmlRootElement(name = "thread")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ForumThread {
+public class ForumThread implements Iterable<Article> {
    @XmlAttribute
    String id;
 
@@ -56,6 +58,27 @@ public class ForumThread {
    @XmlElementWrapper(name = "articles")
    @XmlElement(name = "article")
    List<Article> articles;
+
+   public ForumThread() {
+      articles = new ArrayList<Article>();
+   }
+
+   public String toString() {
+      String retval = "THREAD: ";
+
+      retval += " | ID: " + getId();
+      retval += " | Subject: " + getSubject();
+      retval += " | Author: " + getAuthor();
+      retval += " | # Articles: " + getNumArticles();
+      retval += " | Post date: " + getPostDate();
+      retval += " | Last post date: " + getLastPostDate();
+
+      for (Article article : getArticles()) {
+         retval += article;
+      }
+
+      return retval;
+   }
 
    public List<Article> getArticles() {
       return articles;
@@ -111,6 +134,10 @@ public class ForumThread {
 
    public void setSubject(String subject) {
       this.subject = subject;
+   }
+
+   public Iterator<Article> iterator() {
+      return articles.iterator();
    }
 
 }

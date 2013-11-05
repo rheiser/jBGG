@@ -30,6 +30,10 @@ public class Year {
 
    @XmlValue
    String text;
+   
+   public String toString() {
+      return (text == null || text.equals("")) ? ((value == null || value.equals("")) ? "NA" : value + " (attribute)") : text + " (text node)";
+   }
 
    public String getText() {
       return text;

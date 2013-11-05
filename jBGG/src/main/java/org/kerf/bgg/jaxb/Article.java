@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
@@ -56,6 +56,21 @@ public class Article {
 
    @XmlElement
    String body;
+
+   public String toString() {
+      String retval = "ARTICLE: ";
+
+      retval += " | ID: " + getId();
+      retval += " | Username: " + getUsername();
+      retval += " | Link: " + getLink();
+      retval += " | Post date: " + getPostDate();
+      retval += " | Edit date: " + getEditDate();
+      retval += " | Num edits: " + getNumEdits();
+      retval += " | Subject: "+ getSubject();
+      retval += " | Body: " + getBody();
+      
+      return retval;
+   }
 
    public String getBody() {
       return body;

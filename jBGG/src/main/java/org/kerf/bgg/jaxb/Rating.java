@@ -13,10 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Rating {
+public class Rating implements Iterable<Rank> {
    @XmlAttribute
    String date;
 
@@ -69,6 +70,29 @@ public class Rating {
 
    @XmlElement(name = "averageweight")
    Integer averageWeight;
+
+   public String toString() {
+      String retval = "RATING: ";
+
+      retval += " | Date: " + getDate();
+      retval += " | # Users rated: " + getUsersRated();
+      retval += " | Avg.: " + getAverage();
+      retval += " | Bayesian Avg.: " + getBayesianAverage();
+      retval += " | Std. Dev.: " + getStandardDeviation();
+      retval += " | Median: " + getMedian();
+      retval += " | # Owned: " + getOwned();
+      retval += " | # Trading: " + getTrading();
+      retval += " | # Wanting: " + getWanting();
+      retval += " | # Wishing: " + getWishing();
+      retval += " | # Comments: " + getNumComments();
+      retval += " | # Weights: " + getNumWeights();
+      retval += " | Avg. Weight: " + getAverageWeight();
+
+      for (Rank rank : ranks) {
+         retval += rank;
+      }
+      return retval;
+   }
 
    public Integer getAverage() {
       return average;
@@ -180,6 +204,10 @@ public class Rating {
 
    public void setWishing(Integer wishing) {
       this.wishing = wishing;
+   }
+
+   public Iterator<Rank> iterator() {
+      return ranks.iterator();
    }
 
 }
