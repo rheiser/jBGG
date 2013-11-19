@@ -13,10 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.command;
 
+import org.kerf.bgg.exception.CommandExecutionException;
 import org.kerf.bgg.jaxb.Guild;
 import org.kerf.bgg.type.SortType;
 
@@ -26,6 +27,16 @@ public class GuildsCommand extends Command {
       command = "guilds";
 
       setId(id);
+   }
+
+   @Override
+   public Guild execute() throws CommandExecutionException {
+      Guild guild = super.execute();
+
+      if (guild.getError() != null) {
+         throw new CommandExecutionException(guild.getError());
+      }
+      return guild;
    }
 
    public String getId() {

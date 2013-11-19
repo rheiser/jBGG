@@ -18,5 +18,5 @@
 package org.kerf.bgg.type;
 
 public enum ThingType {
-   boardgame, boardgameexpansion, videogame, rpgitem, rpgissue
+   boardgame, boardgameexpansion, videogame, rpgitem, rpgissue, guild
 }

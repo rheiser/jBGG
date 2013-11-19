@@ -13,10 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.jaxb;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.Date;
 
@@ -28,11 +29,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.kerf.bgg.jaxb.adapter.LongDateAdapter;
+import org.kerf.bgg.jaxb.adapter.URLAdapter;
 import org.kerf.bgg.type.GuildCategory;
 
 @XmlRootElement(name = "guild")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Guild {
+public class Guild implements Serializable {
    @XmlAttribute
    String id;
 
@@ -50,6 +52,7 @@ public class Guild {
    GuildCategory category;
 
    @XmlElement
+   @XmlJavaTypeAdapter(URLAdapter.class)
    URL website;
 
    @XmlElement
@@ -61,9 +64,12 @@ public class Guild {
    @XmlElement
    Location location;
 
+   @XmlElement
+   String error;
+
    public String toString() {
       String retval = "GUILD: ";
-      
+
       retval += " | ID: " + getId();
       retval += " | Name: " + getName();
       retval += " | Created: " + getCreated();
@@ -73,9 +79,10 @@ public class Guild {
       retval += " | Manager: " + getManager();
       retval += " | Description: " + getDescription();
       retval += " | Location: " + getLocation();
-      
+
       return retval;
    }
+
    public GuildCategory getCategory() {
       return category;
    }
@@ -146,6 +153,14 @@ public class Guild {
 
    public void setWebsite(URL website) {
       this.website = website;
+   }
+
+   public String getError() {
+      return error;
+   }
+
+   public void setError(String error) {
+      this.error = error;
    }
 
 }

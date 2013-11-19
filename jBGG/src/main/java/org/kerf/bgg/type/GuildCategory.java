@@ -17,6 +17,8 @@
 
 package org.kerf.bgg.type;
 
-public enum GuildCategory {
+import java.io.Serializable;
+
+public enum GuildCategory implements Serializable {
    event, group, store, hobby, language, occupation, pbem, podcast, region
 }
