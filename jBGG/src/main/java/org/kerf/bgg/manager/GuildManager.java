@@ -25,6 +25,8 @@ import org.kerf.bgg.jaxb.Guild;
 import org.xml.sax.SAXException;
 
 public class GuildManager {
+   private static final int GUILDS_PER_PAGE = 100;
+
    static private final Logger logger = Logger.getLogger(GuildManager.class);
 
    static private HashMap<Integer, Guild> guildCache;
@@ -80,7 +82,7 @@ public class GuildManager {
                objectOutputStream.close();
             }
          } catch (IOException e) {
-           logger.warn(e);
+            logger.warn(e);
          }
       }
    }
@@ -103,7 +105,7 @@ public class GuildManager {
 
       for (int i = 1, j = 1; i <= estimatedNumberOfGuilds; j++) {
          try {
-            retval.add(getGuildById(j + ""));
+            retval.add(getGuildById(Integer.toString(j)));
             i++;
          } catch (CommandExecutionException e) {
             logger.trace("Guild ID " + j + " doesn't exist (it was deleted, or hasn't been assigned)");
@@ -175,19 +177,16 @@ public class GuildManager {
 
       try {
          Document document = Jsoup.connect("http://www.boardgamegeek.com/guild/list").get();
-         Elements lastPageAnchor = document.select("a[title=last page]");
-         assert (lastPageAnchor.size() == 1);
-         Element lastPageAnchorElement = lastPageAnchor.get(0);
+         Element lastPageAnchor = document.select("a[title=last page]").first();
 
-         String lastPage = lastPageAnchorElement.text();
-         lastPage = lastPage.substring(1, lastPage.length() - 1);
+         String lastPage = lastPageAnchor.text();
+         lastPage = lastPage.substring(lastPage.indexOf('[') + 1, lastPage.lastIndexOf(']'));
 
-         String href = lastPageAnchorElement.attr("href");
-         document = Jsoup.connect("http://www.boardgamegeek.com" + href).get();
+         document = Jsoup.connect(lastPageAnchor.attr("abs:href")).get();
          Element mainContent = document.getElementById("main_content");
          Elements rows = mainContent.getElementsByTag("tr");
 
-         retval = (Integer.parseInt(lastPage) - 1) * 100 + rows.size();
+         retval = (Integer.parseInt(lastPage) - 1) * GUILDS_PER_PAGE + rows.size();
       } catch (IOException ioErr) {
          logger.warn(ioErr);
       }
@@ -196,8 +195,10 @@ public class GuildManager {
 
    static public void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
       GuildManager manager = new GuildManager();
+
       int numEst = manager.getEstimatedNumberOfGuilds();
       System.out.println("Estimated number of guilds: " + numEst);
+
       List<Guild> guilds = manager.getAllGuilds();
       System.out.println("Actual number found: " + guilds.size());
 
