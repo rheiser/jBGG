@@ -1,1 +1,4 @@
 /target
+/deleteme.xml
+/.settings
+/.gitignore
