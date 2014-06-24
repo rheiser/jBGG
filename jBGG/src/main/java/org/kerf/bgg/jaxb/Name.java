@@ -20,6 +20,7 @@ package org.kerf.bgg.jaxb;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlValue;
 
 import org.kerf.bgg.type.NameType;
 
@@ -66,6 +67,11 @@ public class Name {
    }
 
    public void setValue(String text) {
+      this.value = text;
+   }
+   
+   @XmlValue
+   public void setTextValue(String text) {
       this.value = text;
    }
 
