@@ -13,13 +13,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*/
+ */
 
 package org.kerf.bgg.command;
 
 import java.io.StringReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -60,18 +62,29 @@ abstract public class Command {
    @SuppressWarnings("unchecked")
    public <T> T execute() throws CommandExecutionException {
       try {
-         String commandLocation = API_URL + command + "?";
-         commandLocation += addProperties();
+         String commandLocation = API_URL + URLEncoder.encode(command + "?" + addProperties());
 
+         logger.debug("Command URL: " + commandLocation);
          URL commandUrl = new URL(commandLocation);
          URLConnection connection = commandUrl.openConnection();
+
+         if (connection instanceof HttpURLConnection) {
+            HttpURLConnection httpConnection = null;
+            int responseCode = 0;
+            
+            do {
+               httpConnection = (HttpURLConnection)commandUrl.openConnection();
+               responseCode = httpConnection.getResponseCode();
+               logger.debug("Response: " + responseCode + ": " + httpConnection.getResponseMessage());
+               Thread.sleep(5000);
+            } while(responseCode == 202);
+         }
 
          String xml = IOUtils.toString(connection.getInputStream());
 
          JAXBContext context = JAXBContext.newInstance(getReturnType(), org.kerf.bgg.jaxb.Error.class);
          Unmarshaller unmarshaller = context.createUnmarshaller();
 
-         logger.debug("URL: " + commandLocation);
          logger.debug("RESULT: " + xml);
          Object result = unmarshaller.unmarshal(new StringReader(xml));
          if (result instanceof org.kerf.bgg.jaxb.Error) {
